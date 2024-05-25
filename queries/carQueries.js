@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS cars (
 const createCarQuery =
   "INSERT INTO cars (user_id, make, model, year, type_id, color_id, category_id, price_per_hour) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 const getAllCarsQuery = `
-SELECT cars.id, cars.make,cars.model, cars.year,cars.price_per_hour, types.type_name as type, colors.color_name as color, categories.category_name as category
+SELECT cars.id, cars.make,cars.model,cars.image, cars.year,cars.price_per_hour, types.type_name as type, colors.color_name as color, categories.category_name as category
 FROM cars
 JOIN types ON cars.type_id = types.id
 JOIN colors ON cars.color_id = colors.id

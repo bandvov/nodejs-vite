@@ -54,6 +54,7 @@ const cars = [
     color_id: 2,
     category_id: 1,
     price_per_hour: 15.5,
+    image: "https://cdn.jdpower.com/Average%20Weight%20Of%20A%20Car.jpg",
   },
   {
     user_id: 1,
@@ -64,6 +65,7 @@ const cars = [
     color_id: 1,
     category_id: 2,
     price_per_hour: 14.75,
+    image: "https://cdn.jdpower.com/Average%20Weight%20Of%20A%20Car.jpg",
   },
   {
     user_id: 2,
@@ -74,6 +76,7 @@ const cars = [
     color_id: 3,
     category_id: 3,
     price_per_hour: 20.0,
+    image: "https://cdn.jdpower.com/Average%20Weight%20Of%20A%20Car.jpg",
   },
 ];
 
@@ -158,7 +161,7 @@ const seedCars = () => {
   return new Promise((resolve, reject) => {
     cars.forEach((car) => {
       connection.query(
-        "INSERT INTO cars (user_id, make, model, year, type_id, color_id, category_id, price_per_hour) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO cars (user_id, make, model, year, type_id, color_id, category_id, price_per_hour, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
         [
           car.user_id,
           car.make,
@@ -168,6 +171,7 @@ const seedCars = () => {
           car.color_id,
           car.category_id,
           car.price_per_hour,
+          car.image,
         ],
         (err, results) => {
           if (err) return reject(err);
