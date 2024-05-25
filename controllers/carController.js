@@ -31,10 +31,9 @@ console.log({result});
     });
   }
   createCar(req, res) {
-    const { name, age } = req.body;
-    const values = [name, age];
-
-    this.service.createCar(values, (err, results) => {
+    const { car } = req.body;
+   
+    this.service.createCar(car, (err, results) => {
       if (err) {
         res.status(500).json({ error: "Internal Server Error" });
         return;

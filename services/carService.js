@@ -1,4 +1,9 @@
-const { getAllCarsQuery, createTableQuery, createCarQuery, getCarByIdQuery } = require("../queries/carQueries");
+const {
+  getAllCarsQuery,
+  createTableQuery,
+  createCarQuery,
+  getCarByIdQuery,
+} = require("../queries/carQueries");
 
 class CarService {
   constructor(db) {
@@ -11,12 +16,25 @@ class CarService {
     return this.db.query(getCarByIdQuery, [id], callback);
   }
   createTable(callback) {
-    this.db.query(createTableQuery, [], callback)
+    this.db.query(createTableQuery, [], callback);
   }
-  createCar(data,callback) {
-    this.db.query(createCarQuery, data, callback)
+  createCar(car, callback) {
+    this.db.query(
+      createCarQuery,
+      [
+        car.user_id,
+        car.make,
+        car.model,
+        car.year,
+        car.type_id,
+        car.color_id,
+        car.category_id,
+        car.price_per_hour,
+      ],
+      callback
+    );
   }
-  
+
   // Add more database operations here
 }
 module.exports = CarService;
