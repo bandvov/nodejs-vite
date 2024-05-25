@@ -5,9 +5,13 @@ const CarService = require("./services/carService");
 const CarController = require("./controllers/carController");
 const exphbs = require("express-handlebars");
 const path = require("path");
-const dotenv = require('dotenv')
-dotenv.config()
+const dotenv = require("dotenv");
+const cors = require("cors");
 
+dotenv.config();
+
+// Enable all CORS requests
+app.use(cors());
 // Database configuration
 const PORT = 4000;
 
@@ -19,7 +23,7 @@ const poolConfig = {
   database: process.env.DATABASE,
 };
 
-app.use(express.json())
+app.use(express.json());
 // Create database instance
 const db = new MySQLDatabase(poolConfig);
 
@@ -30,16 +34,20 @@ const service = new CarService(db);
 const controller = new CarController(service);
 
 // Set up Handlebars as the view engine
-app.engine('handlebars', exphbs.engine({
-    defaultLayout: 'main',
-    layoutsDir: path.join(__dirname, 'views', 'layouts'),
-}));
-app.set('view engine', 'handlebars');
-app.set('views', path.join(__dirname, 'views'));
+app.engine(
+  "handlebars",
+  exphbs.engine({
+    defaultLayout: "main",
+    layoutsDir: path.join(__dirname, "views", "layouts"),
+  })
+);
+app.set("view engine", "handlebars");
+app.set("views", path.join(__dirname, "views"));
 
 app.get("/cars", (req, res) => {
   controller.getCars(req, res);
 });
+
 app.get("/cars/:id", (req, res) => {
   controller.getCarById(req, res);
 });
@@ -48,9 +56,14 @@ app.post("/create-table", (req, res) => {
   controller.createTable(req, res);
 });
 
-app.post("/create-car", (req, res) => {
+app.post("/cars/create", (req, res) => {
   controller.createCar(req, res);
 });
+
+app.delete("/cars/:id", (req, res) => {
+  controller.deleteCar(req, res);
+});
+
 // Start the serverconst PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

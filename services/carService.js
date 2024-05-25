@@ -3,6 +3,7 @@ const {
   createTableQuery,
   createCarQuery,
   getCarByIdQuery,
+  deleteCarQuery,
 } = require("../queries/carQueries");
 
 class CarService {
@@ -33,6 +34,9 @@ class CarService {
       ],
       callback
     );
+  }
+  deleteCar(id, callback) {
+    this.db.query(deleteCarQuery, [id], callback);
   }
 
   // Add more database operations here
