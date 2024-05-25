@@ -47,9 +47,8 @@ app.set("views", path.join(__dirname, "views"));
 app.get("/cars", (req, res) => {
   controller.getCars(req, res);
 });
-
-app.get("/cars/:id", (req, res) => {
-  controller.getCarById(req, res);
+app.get("/cars/search", (req, res) => {
+  controller.searchCar(req, res);
 });
 
 app.post("/create-table", (req, res) => {
@@ -60,10 +59,13 @@ app.post("/cars/create", (req, res) => {
   controller.createCar(req, res);
 });
 
+app.get("/cars/:id", (req, res) => {
+  controller.getCarById(req, res);
+});
+
 app.delete("/cars/:id", (req, res) => {
   controller.deleteCar(req, res);
 });
-
 // Start the serverconst PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

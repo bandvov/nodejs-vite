@@ -4,6 +4,7 @@ const {
   createCarQuery,
   getCarByIdQuery,
   deleteCarQuery,
+  carSearchQuery,
 } = require("../queries/carQueries");
 
 class CarService {
@@ -37,6 +38,10 @@ class CarService {
   }
   deleteCar(id, callback) {
     this.db.query(deleteCarQuery, [id], callback);
+  }
+  searchCar(data, callback) {
+    console.log({data});
+    this.db.query(carSearchQuery, data, callback);
   }
 
   // Add more database operations here

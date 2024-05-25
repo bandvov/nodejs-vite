@@ -8,7 +8,7 @@ class CarController {
         res.status(500).json({ error: "Internal Server Error" });
         return;
       }
-      res.json({ cars: results });
+      res.json(results);
     });
   }
   async getCarById(req, res) {
@@ -49,6 +49,20 @@ class CarController {
       }
       return res.json(results);
     });
+  }
+  searchCar(req, res) {
+    const { search } = req.query;
+    const searchTerm = search.toLowerCase();
+    this.service.searchCar(
+      [`%${searchTerm}%`, `%${searchTerm}%`, `%${searchTerm}%`],
+      (err, results) => {
+        if (err) {
+          res.status(500).json({ error: "Internal Server Error" });
+          return;
+        }
+        return res.json(results);
+      }
+    );
   }
 }
 // Add more controller methods here}

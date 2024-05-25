@@ -25,6 +25,15 @@ JOIN categories ON cars.category_id = categories.id;`;
 
 const getCarByIdQuery = "SELECT * FROM cars WHERE id = ?;";
 const deleteCarQuery = "DELETE FROM cars WHERE id = ?;";
+const carSearchQuery = `
+SELECT cars.id, cars.make,cars.model,cars.image, cars.year,cars.price_per_hour, types.type_name as type, colors.color_name as color, categories.category_name as category
+FROM cars
+JOIN types ON cars.type_id = types.id
+JOIN colors ON cars.color_id = colors.id
+JOIN categories ON cars.category_id = categories.id
+WHERE LOWER(colors.color_name) LIKE ? 
+OR LOWER(make) LIKE ? 
+OR LOWER(model) LIKE ?;`;
 
 module.exports = {
   createTableQuery,
@@ -32,4 +41,5 @@ module.exports = {
   getAllCarsQuery,
   getCarByIdQuery,
   deleteCarQuery,
+  carSearchQuery,
 };
