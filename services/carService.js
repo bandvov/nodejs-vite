@@ -1,6 +1,5 @@
 const {
   getAllCarsQuery,
-  createTableQuery,
   createCarQuery,
   getCarByIdQuery,
   deleteCarQuery,

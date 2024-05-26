@@ -5,9 +5,9 @@ const userController = require("../controllers/userController");
 router.get("/", (req, res) => {
   userController.getUsers(req, res);
 });
-// router.get("/search", (req, res) => {
-//   carController.searchCar(req, res);
-// });
+router.get("/search", (req, res) => {
+  userController.searchUser(req, res);
+});
 
 // router.post("/create", (req, res) => {
 //   userController.createUser(req, res);

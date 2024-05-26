@@ -1,7 +1,7 @@
 const {
   getAllUsersQuery,
   getUserByIdQuery,
-  deleteUserQuery,
+  userSearchQuery,
 } = require("../queries/userQueries");
 const db = require("../database/database");
 const { constructUpdateQuery } = require("../utils");
@@ -17,16 +17,15 @@ class UserService {
 
   getUserById(id, callback) {
     return this.db.query(getUserByIdQuery, [id], callback);
-  }  
+  }
 
   updateUser(id, data, callback) {
     const { query, values } = constructUpdateQuery("users", data, id);
     this.db.query(query, values, callback);
   }
-  // searchCar(data, callback) {
-  //   console.log({data});
-  //   this.db.query(carSearchQuery, data, callback);
-  // }
+  searchCar(data, callback) {
+    this.db.query(userSearchQuery, data, callback);
+  }
 
   // Add more database operations here
 }

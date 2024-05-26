@@ -54,20 +54,20 @@ class UserController {
       return res.json(results);
     });
   }
-  // searchCar(req, res) {
-  //   const { search } = req.query;
-  //   const searchTerm = search.toLowerCase();
-  //   this.service.searchCar(
-  //     [`%${searchTerm}%`, `%${searchTerm}%`, `%${searchTerm}%`],
-  //     (err, results) => {
-  //       if (err) {
-  //         res.status(500).json({ error: "Internal Server Error" });
-  //         return;
-  //       }
-  //       return res.json(results);
-  //     }
-  //   );
-  // }
+  searchUser(req, res) {
+    const { search } = req.query;
+    const searchTerm = search.toLowerCase();
+    this.service.searchCar(
+      [`%${searchTerm}%`, `%${searchTerm}%`, `%${searchTerm}%`],
+      (err, results) => {
+        if (err) {
+          res.status(500).json({ error: "Internal Server Error" });
+          return;
+        }
+        return res.json(results);
+      }
+    );
+  }
 }
 // Create controller instance
 module.exports = new UserController(userService);
