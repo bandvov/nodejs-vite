@@ -23,10 +23,9 @@ class UserController {
     });
   }
 
-  // createCar(req, res) {
-  //   const { car } = req.body;
+  // createuser(req, res) {
 
-  //   this.service.createCar(car, (err, results) => {
+  //   this.service.createuses(req.body, (err, results) => {
   //     if (err) {
   //       res.status(500).json({ error: "Internal Server Error" });
   //       return;

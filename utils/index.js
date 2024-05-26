@@ -9,16 +9,25 @@ function constructUpdateQuery(table, updates, id) {
   }
 
   if (fields.length === 0) {
-    throw new Error('No fields to update.');
+    throw new Error("No fields to update.");
+  }
+  if (id) {
+    values.push(id);
   }
 
-  values.push(id);
-
-  const query = `
+  let query;
+  if (id) {
+    query = `
     UPDATE ${table}
-    SET ${fields.join(', ')}
+    SET ${fields.join(", ")}
     WHERE id = ?
-  `;
+    `;
+  } else {
+    query = `
+    UPDATE ${table}
+    SET ${fields.join(", ")} 
+    `;
+  }
 
   return { query, values };
 }

@@ -9,12 +9,8 @@ router.get("/", (req, res) => {
 //   carController.searchCar(req, res);
 // });
 
-// router.post("/create-table", (req, res) => {
-//   carController.createTable(req, res);
-// });
-
 // router.post("/create", (req, res) => {
-//   carController.createCar(req, res);
+//   userController.createUser(req, res);
 // });
 
 router.get("/:id", (req, res) => {
