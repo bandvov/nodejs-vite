@@ -29,7 +29,7 @@ const users = [
     phone_number: "1234567890",
     password: "password123",
     image:
-      "https://static.wikia.nocookie.net/the_kpop_house/images/6/60/Jisoo.jpg/revision/latest?cb=20200330154248",
+      "https://static.wikia.nocookie.net/the_kpop_house/images/6/60/Jisoo.jpg",
   },
   {
     login: "bob123",
@@ -39,7 +39,7 @@ const users = [
     phone_number: "0987654321",
     password: "password456",
     image:
-      "https://static.wikia.nocookie.net/the_kpop_house/images/6/60/Jisoo.jpg/revision/latest?cb=20200330154248",
+      "https://static.wikia.nocookie.net/the_kpop_house/images/6/60/Jisoo.jpg",
   },
 ];
 
