@@ -8,22 +8,11 @@ const userRouter = require("./routes/userRouter");
 
 // Enable all CORS requests
 app.use(cors());
-// Database configuration
+
 const PORT = 4000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Set up Handlebars as the view engine
-app.engine(
-  "handlebars",
-  exphbs.engine({
-    defaultLayout: "main",
-    layoutsDir: path.join(__dirname, "views", "layouts"),
-  })
-);
-app.set("view engine", "handlebars");
-app.set("views", path.join(__dirname, "views"));
 
 app.use("/cars", carRouter);
 app.use("/users", userRouter);
