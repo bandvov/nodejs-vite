@@ -17,6 +17,10 @@ router.get("/:id", (req, res) => {
   userController.getUserById(req, res);
 });
 
+router.patch("/:id", (req, res) => {
+  userController.updateUser(req, res);
+});
+
 router.delete("/:id", (req, res) => {
   userController.deleteUser(req, res);
 });

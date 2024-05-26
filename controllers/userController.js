@@ -33,9 +33,20 @@ class UserController {
   //     return res.json(results);
   //   });
   // }
+
+  updateUser(req, res) {
+    const { id } = req.params;
+    this.service.updateUser(id, req.body, (err, results) => {
+      if (err) {
+        res.status(500).json({ error: "Internal Server Error" });
+        return;
+      }
+      return res.json(results);
+    });
+  }
   deleteUser(req, res) {
     const { id } = req.params;
-    this.service.deleteUser(id, (err, results) => {
+    this.service.updateUser(id, { deleted: true }, (err, results) => {
       if (err) {
         res.status(500).json({ error: "Internal Server Error" });
         return;

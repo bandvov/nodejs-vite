@@ -12,6 +12,7 @@ app.use(cors());
 const PORT = 4000;
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Set up Handlebars as the view engine
 app.engine(
