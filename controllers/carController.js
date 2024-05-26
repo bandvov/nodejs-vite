@@ -21,19 +21,8 @@ class CarController {
       res.render("one_car", { car: result[0] });
     });
   }
-  createTable(req, res) {
-    this.service.createTable((err, results) => {
-      if (err) {
-        res.status(500).json({ error: "Internal Server Error" });
-        return;
-      }
-      return res.json(results);
-    });
-  }
   createCar(req, res) {
-    const { car } = req.body;
-
-    this.service.createCar(car, (err, results) => {
+    this.service.createCar(req.body, (err, results) => {
       if (err) {
         res.status(500).json({ error: "Internal Server Error" });
         return;

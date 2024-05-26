@@ -18,9 +18,7 @@ class CarService {
   getCarById(id, callback) {
     return this.db.query(getCarByIdQuery, [id], callback);
   }
-  createTable(callback) {
-    this.db.query(createTableQuery, [], callback);
-  }
+
   createCar(car, callback) {
     this.db.query(
       createCarQuery,
@@ -29,10 +27,11 @@ class CarService {
         car.make,
         car.model,
         car.year,
-        car.type_id,
-        car.color_id,
-        car.category_id,
+        car.type,
+        car.color,
+        car.category,
         car.price_per_hour,
+        car.image,
       ],
       callback
     );
