@@ -5,33 +5,24 @@ CREATE TABLE IF NOT EXISTS cars (
     make VARCHAR(50) NOT NULL,
     model VARCHAR(50) NOT NULL,
     year INT NOT NULL,
-    type_id INT,
-    color_id INT,
-    category_id INT,
+    color VARCHAR(50) NOT NULL,
+    category VARCHAR(50) NOT NULL,
+    type VARCHAR(50) NOT NULL,
     price_per_hour DECIMAL(10, 2),
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (type_id) REFERENCES types(id),
-    FOREIGN KEY (color_id) REFERENCES colors(id),
-    FOREIGN KEY (category_id) REFERENCES categories(id)
+    image VARCHAR(255),
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );`;
 const createCarQuery =
-  "INSERT INTO cars (user_id, make, model, year, type_id, color_id, category_id, price_per_hour) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+  "INSERT INTO cars (user_id, make, model, year, type, color, category, price_per_hour) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 const getAllCarsQuery = `
-SELECT cars.id, cars.make,cars.model,cars.image, cars.year,cars.price_per_hour, types.type_name as type, colors.color_name as color, categories.category_name as category
-FROM cars
-JOIN types ON cars.type_id = types.id
-JOIN colors ON cars.color_id = colors.id
-JOIN categories ON cars.category_id = categories.id;`;
+SELECT id, cars.make,cars.model, image, year, price_per_hour, type, color, category FROM cars`;
 
 const getCarByIdQuery = "SELECT * FROM cars WHERE id = ?;";
 const deleteCarQuery = "DELETE FROM cars WHERE id = ?;";
 const carSearchQuery = `
-SELECT cars.id, cars.make,cars.model,cars.image, cars.year,cars.price_per_hour, types.type_name as type, colors.color_name as color, categories.category_name as category
+SELECT id, make, model, image, year, price_per_hour, type, color, category
 FROM cars
-JOIN types ON cars.type_id = types.id
-JOIN colors ON cars.color_id = colors.id
-JOIN categories ON cars.category_id = categories.id
-WHERE LOWER(colors.color_name) LIKE ? 
+WHERE LOWER(color) LIKE ? 
 OR LOWER(make) LIKE ? 
 OR LOWER(model) LIKE ?;`;
 
