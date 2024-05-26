@@ -28,6 +28,8 @@ const users = [
     email: "alice@example.com",
     phone_number: "1234567890",
     password: "password123",
+    image:
+      "https://static.wikia.nocookie.net/the_kpop_house/images/6/60/Jisoo.jpg/revision/latest?cb=20200330154248",
   },
   {
     login: "bob123",
@@ -36,6 +38,8 @@ const users = [
     email: "bob@example.com",
     phone_number: "0987654321",
     password: "password456",
+    image:
+      "https://static.wikia.nocookie.net/the_kpop_house/images/6/60/Jisoo.jpg/revision/latest?cb=20200330154248",
   },
 ];
 
@@ -79,7 +83,7 @@ const seedUser = async (user) => {
   const hashedPassword = await bcrypt.hash(user.password, saltRounds);
   return new Promise((resolve, reject) => {
     connection.query(
-      "INSERT INTO users (login, first_name, last_name, email, phone_number, password, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())",
+      "INSERT INTO users (login, first_name, last_name, email, phone_number, password, image, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())",
       [
         user.login,
         user.first_name,
@@ -87,6 +91,7 @@ const seedUser = async (user) => {
         user.email,
         user.phone_number,
         hashedPassword,
+        user.image,
       ],
       (err, results) => {
         if (err) return reject(err);
@@ -118,7 +123,6 @@ const seedCar = (car) => {
     );
   });
 };
-
 
 const seedUsers = async () => {
   for (const user of users) {
