@@ -1,7 +1,6 @@
 const mysql = require("mysql2");
 const dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
-const { seedTablesQuery } = require("./queries/seedQuery");
 dotenv.config();
 // Create a connection to the database
 const connection = mysql.createConnection({
@@ -27,6 +26,7 @@ const users = [
     first_name: "Alice",
     last_name: "Smith",
     email: "alice@example.com",
+    phone_number: "1234567890",
     password: "password123",
   },
   {
@@ -34,6 +34,7 @@ const users = [
     first_name: "Bob",
     last_name: "Jones",
     email: "bob@example.com",
+    phone_number: "0987654321",
     password: "password456",
   },
 ];
@@ -74,57 +75,75 @@ const cars = [
   },
 ];
 
-const seedUsers = async () => {
-  for (const user of users) {
-    const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+const seedUser = async (user) => {
+  const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+  return new Promise((resolve, reject) => {
     connection.query(
-      "INSERT INTO users (login, first_name, last_name, email, password) VALUES (?, ?, ?, ?, ?)",
-      [user.login, user.first_name, user.last_name, user.email, hashedPassword],
+      "INSERT INTO users (login, first_name, last_name, email, phone_number, password, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW())",
+      [
+        user.login,
+        user.first_name,
+        user.last_name,
+        user.email,
+        user.phone_number,
+        hashedPassword,
+      ],
       (err, results) => {
-        if (err) {
-          console.error("Error inserting user:", err);
-        }
+        if (err) return reject(err);
+        resolve(results.insertId);
       }
     );
+  });
+};
+
+const seedCar = (car) => {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      "INSERT INTO cars (user_id, make, model, year, color, category, type, price_per_hour, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      [
+        car.user_id,
+        car.make,
+        car.model,
+        car.year,
+        car.color,
+        car.category,
+        car.type,
+        car.price_per_hour,
+        car.image,
+      ],
+      (err, results) => {
+        if (err) return reject(err);
+        resolve(results.insertId);
+      }
+    );
+  });
+};
+
+
+const seedUsers = async () => {
+  for (const user of users) {
+    try {
+      const userId = await seedUser(user);
+      console.log(`Inserted user with ID: ${userId}`);
+    } catch (error) {
+      console.error("Error inserting user:", error);
+    }
   }
 };
 
-const seedCars = () => {
-  return new Promise((resolve, reject) => {
-    cars.forEach((car) => {
-      connection.query(
-        "INSERT INTO cars (user_id, make, model, year, color, category, type, price_per_hour, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        [
-          car.user_id,
-          car.make,
-          car.model,
-          car.year,
-          car.color,
-          car.category,
-          car.type,
-          car.price_per_hour,
-          car.image,
-        ],
-        (err, results) => {
-          if (err) return reject(err);
-        }
-      );
-    });
-    resolve();
-  });
-};
-
-const seedTables = async () => {
-  connection.query(seedTablesQuery, [], (err, results) => {
-    if (err) {
-      return err;
+const seedCars = async () => {
+  for (const car of cars) {
+    try {
+      const carId = await seedCar(car);
+      console.log(`Inserted car with ID: ${carId}`);
+    } catch (error) {
+      console.error("Error inserting car:", error);
     }
-  });
+  }
 };
 
 const seedDatabase = async () => {
   try {
-    await seedTables();
     await seedUsers();
     await seedCars();
     console.log("Database seeded successfully.");
