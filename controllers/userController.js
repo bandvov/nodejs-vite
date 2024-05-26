@@ -13,15 +13,15 @@ class UserController {
       res.json(results);
     });
   }
-  // async getCarById(req, res) {
-  //   this.service.getCarById(req.params.id, (err, result) => {
-  //     if (err) {
-  //       res.status(500).json({ error: "Internal Server Error" });
-  //       return;
-  //     }
-  //     res.render("one_car", { car: result[0] });
-  //   });
-  // }
+  async getUserById(req, res) {
+    this.service.getUserById(req.params.id, (err, result) => {
+      if (err) {
+        res.status(500).json({ error: "Internal Server Error" });
+        return;
+      }
+      res.json(result[0]);
+    });
+  }
   // createTable(req, res) {
   //   this.service.createTable((err, results) => {
   //     if (err) {

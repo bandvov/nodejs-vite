@@ -1,4 +1,4 @@
-const { getAllUsersQuery } = require("../queries/userQueries");
+const { getAllUsersQuery, getUserByIdQuery } = require("../queries/userQueries");
 const db = require("../database/database");
 
 class UserService {
@@ -8,9 +8,9 @@ class UserService {
   getAllUsers(callback) {
     return this.db.query(getAllUsersQuery, [], callback);
   }
-  // getCarById(id, callback) {
-  //   return this.db.query(getCarByIdQuery, [id], callback);
-  // }
+  getUserById(id, callback) {
+    return this.db.query(getUserByIdQuery, [id], callback);
+  }
   // createTable(callback) {
   //   this.db.query(createTableQuery, [], callback);
   // }

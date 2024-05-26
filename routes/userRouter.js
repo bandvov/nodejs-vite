@@ -17,9 +17,9 @@ router.get("/", (req, res) => {
 //   carController.createCar(req, res);
 // });
 
-// router.get("/:id", (req, res) => {
-//   carController.getCarById(req, res);
-// });
+router.get("/:id", (req, res) => {
+  userController.getUserById(req, res);
+});
 
 // router.delete("/:id", (req, res) => {
 //   carController.deleteCar(req, res);
