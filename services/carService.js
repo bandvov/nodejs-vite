@@ -6,6 +6,7 @@ const {
   deleteCarQuery,
   carSearchQuery,
 } = require("../queries/carQueries");
+const db = require("../database/database");
 
 class CarService {
   constructor(db) {
@@ -40,10 +41,11 @@ class CarService {
     this.db.query(deleteCarQuery, [id], callback);
   }
   searchCar(data, callback) {
-    console.log({data});
+    console.log({ data });
     this.db.query(carSearchQuery, data, callback);
   }
 
   // Add more database operations here
 }
-module.exports = CarService;
+// Create service instance
+module.exports = new CarService(db);

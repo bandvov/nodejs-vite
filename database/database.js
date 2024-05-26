@@ -1,4 +1,6 @@
 const mysql = require("mysql2");
+require("dotenv").config();
+
 class MySQLDatabase {
   constructor(config) {
     this.pool = mysql.createPool(config);
@@ -32,4 +34,14 @@ class MySQLDatabase {
     });
   }
 }
-module.exports = MySQLDatabase;
+
+const poolConfig = {
+  connectionLimit: 10,
+  host: process.env.HOST,
+  user: process.env.USER,
+  password: process.env.PASSWORD,
+  database: process.env.DATABASE,
+};
+
+// Create database instance
+module.exports = new MySQLDatabase(poolConfig);

@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS cars (
 const createCarQuery =
   "INSERT INTO cars (user_id, make, model, year, type, color, category, price_per_hour) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 const getAllCarsQuery = `
-SELECT id, cars.make,cars.model, image, year, price_per_hour, type, color, category FROM cars`;
+SELECT id, make, model, image, year, price_per_hour, type, color, category FROM cars`;
 
 const getCarByIdQuery = "SELECT * FROM cars WHERE id = ?;";
 const deleteCarQuery = "DELETE FROM cars WHERE id = ?;";

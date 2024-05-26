@@ -1,3 +1,4 @@
+const carService = require("../services/carService");
 class CarController {
   constructor(service) {
     this.service = service;
@@ -66,4 +67,6 @@ class CarController {
   }
 }
 // Add more controller methods here}
-module.exports = CarController;
+
+// Create controller instance
+module.exports = new CarController(carService);
