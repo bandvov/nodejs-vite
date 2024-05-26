@@ -30,6 +30,7 @@ const users = [
     password: "password123",
     image:
       "https://static.wikia.nocookie.net/the_kpop_house/images/6/60/Jisoo.jpg/revision/latest?cb=20200330154248",
+    deleted: false,
   },
   {
     login: "bob123",
@@ -40,6 +41,7 @@ const users = [
     password: "password456",
     image:
       "https://static.wikia.nocookie.net/the_kpop_house/images/6/60/Jisoo.jpg/revision/latest?cb=20200330154248",
+    deleted: false,
   },
 ];
 
@@ -83,7 +85,7 @@ const seedUser = async (user) => {
   const hashedPassword = await bcrypt.hash(user.password, saltRounds);
   return new Promise((resolve, reject) => {
     connection.query(
-      "INSERT INTO users (login, first_name, last_name, email, phone_number, password, image, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())",
+      "INSERT INTO users (login, first_name, last_name, email, phone_number, password, image,deleted, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())",
       [
         user.login,
         user.first_name,
@@ -92,6 +94,7 @@ const seedUser = async (user) => {
         user.phone_number,
         hashedPassword,
         user.image,
+        user.deleted,
       ],
       (err, results) => {
         if (err) return reject(err);

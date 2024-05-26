@@ -1,5 +1,6 @@
 const getAllUsersQuery = `
-SELECT id, email, first_name, last_name, created_at, phone_number, image FROM users;`;
+SELECT id, email, first_name, last_name, created_at, phone_number, image FROM users
+WHERE deleted = FALSE;`;
 const getUserByIdQuery =
   "SELECT id, email, first_name, last_name, created_at, phone_number FROM users WHERE id = ?;";
 const getUserByEmailQuery =

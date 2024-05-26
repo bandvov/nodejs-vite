@@ -21,8 +21,8 @@ router.get("/:id", (req, res) => {
   userController.getUserById(req, res);
 });
 
-// router.delete("/:id", (req, res) => {
-//   carController.deleteCar(req, res);
-// });
+router.delete("/:id", (req, res) => {
+  userController.deleteUser(req, res);
+});
 
 module.exports = router;

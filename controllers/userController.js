@@ -22,15 +22,7 @@ class UserController {
       res.json(result[0]);
     });
   }
-  // createTable(req, res) {
-  //   this.service.createTable((err, results) => {
-  //     if (err) {
-  //       res.status(500).json({ error: "Internal Server Error" });
-  //       return;
-  //     }
-  //     return res.json(results);
-  //   });
-  // }
+
   // createCar(req, res) {
   //   const { car } = req.body;
 
@@ -42,16 +34,16 @@ class UserController {
   //     return res.json(results);
   //   });
   // }
-  // deleteCar(req, res) {
-  //   const { id } = req.params;
-  //   this.service.deleteCar(id, (err, results) => {
-  //     if (err) {
-  //       res.status(500).json({ error: "Internal Server Error" });
-  //       return;
-  //     }
-  //     return res.json(results);
-  //   });
-  // }
+  deleteUser(req, res) {
+    const { id } = req.params;
+    this.service.deleteUser(id, (err, results) => {
+      if (err) {
+        res.status(500).json({ error: "Internal Server Error" });
+        return;
+      }
+      return res.json(results);
+    });
+  }
   // searchCar(req, res) {
   //   const { search } = req.query;
   //   const searchTerm = search.toLowerCase();
