@@ -23,7 +23,7 @@ class UserService {
     const { query, values } = constructUpdateQuery("users", data, id);
     this.db.query(query, values, callback);
   }
-  searchCar(data, callback) {
+  searchUser(data, callback) {
     this.db.query(userSearchQuery, data, callback);
   }
 

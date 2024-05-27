@@ -57,7 +57,7 @@ class UserController {
   searchUser(req, res) {
     const { search } = req.query;
     const searchTerm = search.toLowerCase();
-    this.service.searchCar(
+    this.service.searchUser(
       [`%${searchTerm}%`, `%${searchTerm}%`, `%${searchTerm}%`],
       (err, results) => {
         if (err) {
