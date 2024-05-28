@@ -18,7 +18,7 @@ class CarController {
         res.status(500).json({ error: "Internal Server Error" });
         return;
       }
-      res.render("one_car", { car: result[0] });
+      res.json(result[0]);
     });
   }
   createCar(req, res) {

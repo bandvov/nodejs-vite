@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const exphbs = require("express-handlebars");
 const path = require("path");
 const cors = require("cors");
 const carRouter = require("./routes/carRouter");
