@@ -244,7 +244,8 @@ const cars = [
     type: "Sedan",
     year: 2018,
     price_per_hour: 20,
-    image: "https://images.caradisiac.com/images/2/2/8/5/202285/S1-les-tesla-model-s-et-y-augmentent-leurs-prix-755439.jpg",
+    image:
+      "https://images.caradisiac.com/images/2/2/8/5/202285/S1-les-tesla-model-s-et-y-augmentent-leurs-prix-755439.jpg",
   },
   {
     user_id: 2,
@@ -291,7 +292,8 @@ const cars = [
     type: "SUV",
     year: 2021,
     price_per_hour: 25,
-    image: "https://images.caradisiac.com/images/2/2/8/5/202285/S1-les-tesla-model-s-et-y-augmentent-leurs-prix-755439.jpg",
+    image:
+      "https://images.caradisiac.com/images/2/2/8/5/202285/S1-les-tesla-model-s-et-y-augmentent-leurs-prix-755439.jpg",
   },
   {
     user_id: 2,
@@ -317,6 +319,14 @@ const cars = [
     image:
       "https://images.caradisiac.com/images/2/2/8/5/202285/S1-les-tesla-model-s-et-y-augmentent-leurs-prix-755439.jpg",
   },
+];
+
+// Sample user IDs and car IDs
+const favorites = [
+  { user_id: 1, car_id: 1 },
+  { user_id: 1, car_id: 2 },
+  { user_id: 2, car_id: 3 },
+  { user_id: 2, car_id: 5 },
 ];
 
 const seedUser = async (user) => {
@@ -363,6 +373,18 @@ const seedCar = (car) => {
     );
   });
 };
+const seedFavovorite = (favorite) => {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      "INSERT INTO favorites (user_id, car_id) VALUES (?, ?)",
+      [favorite.user_id, favorite.car_id],
+      (err, results) => {
+        if (err) return reject(err);
+        resolve(results.insertId);
+      }
+    );
+  });
+};
 
 const seedUsers = async () => {
   for (const user of users) {
@@ -385,11 +407,22 @@ const seedCars = async () => {
     }
   }
 };
+const seedFavovorites = async () => {
+  for (const favorite of favorites) {
+    try {
+      const favoriteId = await seedFavovorite(favorite);
+      console.log(`Inserted favorite with ID: ${favoriteId}`);
+    } catch (error) {
+      console.error("Error inserting favorite:", error);
+    }
+  }
+};
 
 const seedDatabase = async () => {
   try {
-    await seedUsers();
-    await seedCars();
+    // await seedUsers();
+    // await seedCars();
+    await seedFavovorites()
     console.log("Database seeded successfully.");
   } catch (error) {
     console.error("Error seeding the database:", error);

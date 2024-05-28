@@ -30,5 +30,14 @@ CREATE TABLE IF NOT EXISTS cars (
     image VARCHAR(255),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
+CREATE TABLE favorites (
+  user_id INT NOT NULL,
+  car_id INT NOT NULL,
+  PRIMARY KEY (user_id, car_id),
+  FOREIGN KEY (user_id) REFERENCES users(id),
+  FOREIGN KEY (car_id) REFERENCES cars(id)
+);
 `;
+
+
 module.exports = { seedTablesQuery };
