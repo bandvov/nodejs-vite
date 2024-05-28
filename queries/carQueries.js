@@ -12,7 +12,7 @@ SELECT id, make, model, image, year, price_per_hour, type, color, category
 FROM cars
 WHERE LOWER(color) LIKE ? 
 OR LOWER(make) LIKE ? 
-OR LOWER(model) LIKE ?;`;
+OR LOWER(model) LIKE ?`;
 
 module.exports = {
   createCarQuery,

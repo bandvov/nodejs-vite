@@ -6,6 +6,7 @@ const {
   carSearchQuery,
 } = require("../queries/carQueries");
 const db = require("../database/database");
+const { constructCarSearchQuery } = require("../utils");
 
 class CarService {
   constructor(db) {
@@ -39,8 +40,8 @@ class CarService {
     this.db.query(deleteCarQuery, [id], callback);
   }
   searchCar(data, callback) {
-    console.log({ data });
-    this.db.query(carSearchQuery, data, callback);
+    const { query, params } = constructCarSearchQuery(data);
+    this.db.query(query, params, callback);
   }
 
   // Add more database operations here

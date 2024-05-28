@@ -41,18 +41,13 @@ class CarController {
     });
   }
   searchCar(req, res) {
-    const { search } = req.query;
-    const searchTerm = search.toLowerCase();
-    this.service.searchCar(
-      [`%${searchTerm}%`, `%${searchTerm}%`, `%${searchTerm}%`],
-      (err, results) => {
-        if (err) {
-          res.status(500).json({ error: "Internal Server Error" });
-          return;
-        }
-        return res.json(results);
+    this.service.searchCar(req.query, (err, results) => {
+      if (err) {
+        res.status(500).json({ error: "Internal Server Error" });
+        return;
       }
-    );
+      return res.json(results);
+    });
   }
 }
 // Add more controller methods here}
