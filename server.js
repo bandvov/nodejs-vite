@@ -6,7 +6,7 @@ const carRouter = require("./routes/carRouter");
 const userRouter = require("./routes/userRouter");
 const session = require("express-session");
 const passport = require("./passport");
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 
 app.use(cookieParser());
 
@@ -50,12 +50,19 @@ app.get(
       httpOnly: true,
       secure: false,
     });
+
     res.cookie("access_token", req.user.accessToken, {
       httpOnly: true,
       secure: false,
     });
+
+    res.cookie("user_id", 1, {
+      httpOnly: false,
+      secure: false,
+    });
+
     res.cookie("name", req.user.profile.displayName);
-    
+
     res.redirect("http://localhost:3000");
   }
 );

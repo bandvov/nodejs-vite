@@ -2,6 +2,9 @@ const getAllUsersQuery = `
 SELECT id, email, first_name, last_name, created_at, phone_number, image FROM users
 WHERE blocked = 0
    AND deleted = 0;`;
+const createUserQuery =
+  "INSERT INTO users (email, first_name, last_name, phone_number, login, image, password) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
 const getUserByIdQuery =
   "SELECT id, email, first_name, last_name, created_at, phone_number FROM users WHERE id = ?;";
 const getUserByEmailQuery =
@@ -18,4 +21,5 @@ module.exports = {
   getUserByIdQuery,
   getUserByEmailQuery,
   userSearchQuery,
+  createUserQuery,
 };

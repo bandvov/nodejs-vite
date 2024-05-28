@@ -9,9 +9,9 @@ router.get("/search", (req, res) => {
   userController.searchUser(req, res);
 });
 
-// router.post("/create", (req, res) => {
-//   userController.createUser(req, res);
-// });
+router.post("/register", (req, res) => {
+  userController.createUser(req, res);
+});
 
 router.get("/:id", (req, res) => {
   userController.getUserById(req, res);

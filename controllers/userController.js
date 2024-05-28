@@ -23,16 +23,16 @@ class UserController {
     });
   }
 
-  // createuser(req, res) {
-
-  //   this.service.createuses(req.body, (err, results) => {
-  //     if (err) {
-  //       res.status(500).json({ error: "Internal Server Error" });
-  //       return;
-  //     }
-  //     return res.json(results);
-  //   });
-  // }
+  createUser(req, res) {
+    console.log(req.body);
+    this.service.createUser(req.body, (err, results) => {
+      if (err) {
+        res.status(500).json({ error: "Internal Server Error" });
+        return;
+      }
+      return res.json(results);
+    });
+  }
 
   updateUser(req, res) {
     const { id } = req.params;

@@ -2,9 +2,11 @@ const {
   getAllUsersQuery,
   getUserByIdQuery,
   userSearchQuery,
+  createUserQuery,
 } = require("../queries/userQueries");
 const db = require("../database/database");
 const { constructUpdateQuery } = require("../utils");
+const bcrypt = require("bcrypt");
 
 class UserService {
   constructor(db) {
@@ -27,7 +29,18 @@ class UserService {
     this.db.query(userSearchQuery, data, callback);
   }
 
-  // Add more database operations here
+  async createUser(
+    { email, first_name, last_name, phone_number, login, image, password },
+    callback
+  ) {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    this.db.query(
+      createUserQuery,
+      [email, first_name, last_name, phone_number, login, image, hashedPassword],
+      callback
+    );
+  }
 }
+
 // Create service instance
 module.exports = new UserService(db);
