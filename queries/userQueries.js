@@ -7,8 +7,8 @@ const createUserQuery =
 
 const getUserByIdQuery =
   "SELECT id, email, first_name, last_name, created_at, phone_number FROM users WHERE id = ?;";
-const getUserByEmailQuery =
-  "SELECT id, email, first_name, last_name, created_at, phone_number,password FROM users WHERE email = ?;";
+const getUserByLoginQuery =
+  "SELECT id, email, first_name, last_name, created_at, phone_number,password FROM users WHERE login = ?;";
 const userSearchQuery = `
 SELECT id, email, first_name, last_name, created_at, phone_number, image 
 FROM users
@@ -19,7 +19,7 @@ OR LOWER(last_name) LIKE ?;`;
 module.exports = {
   getAllUsersQuery,
   getUserByIdQuery,
-  getUserByEmailQuery,
+  getUserByLoginQuery,
   userSearchQuery,
   createUserQuery,
 };

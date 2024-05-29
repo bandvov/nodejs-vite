@@ -7,8 +7,7 @@ const userRouter = require("./routes/userRouter");
 const session = require("express-session");
 const passport = require("./passport");
 const cookieParser = require("cookie-parser");
-
-app.use(cookieParser());
+var jwt = require("jsonwebtoken");
 
 // Enable all CORS requests
 app.use(
@@ -21,6 +20,7 @@ const PORT = 4000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
 app.use(
   session({
@@ -38,6 +38,38 @@ app.use(passport.session());
 
 // Serve static files from the React app
 // app.use(express.static(path.join(__dirname, "client/build")));
+
+app.post("/login", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+    if (err) throw err;
+    console.log({ user, info });
+    if (!user) res.json({ success: false, message: info.message });
+    else {
+      req.logIn(user, (err) => {
+        if (err) throw err;
+        // Generate the token
+        var token = jwt.sign({ email: info.email }, "shhhhh");
+        console.log({ token });
+        res.cookie("access_token", token, { httpOnly: true, secure: true });
+
+        res.cookie("user_id", info.id, {
+          httpOnly: false,
+          secure: false,
+        });
+
+        res.cookie("user_name", info.first_name + " " + info.last_name);
+
+        res.json({
+          success: true,
+          id: 4,
+          email: info.email,
+          first_name: info.first_name,
+          last_name: info.last_name,
+        });
+      });
+    }
+  })(req, res, next);
+});
 
 app.get("/auth/facebook", passport.authenticate("facebook"));
 app.get(

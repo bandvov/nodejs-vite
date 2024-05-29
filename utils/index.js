@@ -1,4 +1,5 @@
 const { carSearchQuery } = require("../queries/carQueries");
+require("dotenv").config();
 
 // utils.js
 function constructUpdateQuery(table, updates, id) {

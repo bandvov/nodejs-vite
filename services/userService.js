@@ -3,6 +3,7 @@ const {
   getUserByIdQuery,
   userSearchQuery,
   createUserQuery,
+  getUserByLoginQuery,
 } = require("../queries/userQueries");
 const db = require("../database/database");
 const { constructUpdateQuery } = require("../utils");
@@ -20,6 +21,9 @@ class UserService {
   getUserById(id, callback) {
     return this.db.query(getUserByIdQuery, [id], callback);
   }
+  getUserByLogin(email, callback) {
+    return this.db.query(getUserByLoginQuery, [email], callback);
+  }
 
   updateUser(id, data, callback) {
     const { query, values } = constructUpdateQuery("users", data, id);
@@ -36,7 +40,15 @@ class UserService {
     const hashedPassword = await bcrypt.hash(password, 10);
     this.db.query(
       createUserQuery,
-      [email, first_name, last_name, phone_number, login, image, hashedPassword],
+      [
+        email,
+        first_name,
+        last_name,
+        phone_number,
+        login,
+        image,
+        hashedPassword,
+      ],
       callback
     );
   }
