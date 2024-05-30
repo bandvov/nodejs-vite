@@ -1,6 +1,18 @@
 const mysql = require("mysql2");
 require("dotenv").config();
+const { Pool } = require('pg');
 
+// Create a new connection pool
+const pool = new Pool({
+ host: process.env.HOST,
+ database:process.env.DATABASE,
+ user:process.env.USER,
+ password:process.env.PASSWORD,
+//  connectionString:process.env.CONNECTION_STRING,
+  // ssl: {
+  //   rejectUnauthorized: false // Required for connections to Render.com PostgreSQL instances
+  // }
+});
 class MySQLDatabase {
   constructor(config) {
     this.pool = mysql.createPool(config);
