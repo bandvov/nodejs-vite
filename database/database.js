@@ -8,6 +8,7 @@ const pool = new Pool({
   database: process.env.DATABASE,
   user: process.env.USER,
   password: process.env.PASSWORD,
+  port: 5432,
   max: 10, // maximum number of clients in the pool
   //  connectionString:process.env.CONNECTION_STRING,
   ssl: {
