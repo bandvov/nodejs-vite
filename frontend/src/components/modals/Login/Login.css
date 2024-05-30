@@ -1,0 +1,10 @@
+button:disabled {
+  background-color: #ccc;
+}
+
+ a.registration {
+  width: max-content;
+  padding: 4px 16px;
+  border-radius: 10px;
+  background-color: rgb(230, 230, 230);
+}

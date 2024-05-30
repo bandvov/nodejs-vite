@@ -1,0 +1,14 @@
+.list-container {
+  display: flex;
+  border-bottom: 1px solid;
+}
+
+.list-container .item {
+  flex: 1;
+  text-align: center;
+}
+
+.list-container .item:first-child,
+.list-container .item:last-child {
+  flex: 0 0 20%;
+}
