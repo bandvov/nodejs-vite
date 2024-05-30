@@ -10,12 +10,12 @@ const passport = require("./passport");
 const cookieParser = require("cookie-parser");
 
 // Enable all CORS requests
-app.use(
-  cors({
-    origin: "http://localhost:3000", // Replace with the URL of your React app
-    credentials: true,
-  })
-);
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000", // Replace with the URL of your React app
+//     credentials: true,
+//   })
+// );
 const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
