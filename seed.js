@@ -420,8 +420,8 @@ const seedFavovorites = async () => {
 
 const seedDatabase = async () => {
   try {
-    // await seedUsers();
-    // await seedCars();
+    await seedUsers();
+    await seedCars();
     await seedFavovorites()
     console.log("Database seeded successfully.");
   } catch (error) {
