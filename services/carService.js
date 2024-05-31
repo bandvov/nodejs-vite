@@ -3,7 +3,6 @@ const {
   createCarQuery,
   getCarByIdQuery,
   deleteCarQuery,
-  carSearchQuery,
 } = require("../queries/carQueries");
 const db = require("../database/database");
 const { constructCarSearchQuery } = require("../utils");
@@ -43,7 +42,9 @@ class CarService {
     const { query, params } = constructCarSearchQuery(data);
     this.db.query(query, params, callback);
   }
-
+  addFavorite(data, callback) {
+    this.db.query(addFavoriteQuery, [data.user_id, data.car_id], callback);
+  }
   // Add more database operations here
 }
 // Create service instance

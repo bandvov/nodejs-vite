@@ -49,6 +49,15 @@ class CarController {
       return res.json(results.rows);
     });
   }
+  favoriteCar(req, res) {
+    this.service.addFavorite(req.query, (err, results) => {
+      if (err) {
+        res.status(500).json({ error: err });
+        return;
+      }
+      return res.json(results.rows);
+    });
+  }
 }
 // Add more controller methods here}
 
