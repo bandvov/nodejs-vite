@@ -9,7 +9,7 @@ class CarController {
         res.status(500).json({ error: "Internal Server Error" });
         return;
       }
-      res.json(results);
+      res.json(results.rows);
     });
   }
   async getCarById(req, res) {
@@ -18,7 +18,7 @@ class CarController {
         res.status(500).json({ error: "Internal Server Error" });
         return;
       }
-      res.json(result[0]);
+      res.json(result[0].row);
     });
   }
   createCar(req, res) {
@@ -46,7 +46,7 @@ class CarController {
         res.status(500).json({ error: "Internal Server Error" });
         return;
       }
-      return res.json(results);
+      return res.json(results.rows);
     });
   }
 }
