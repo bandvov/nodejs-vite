@@ -37,23 +37,35 @@ function constructUpdateQuery(table, updates, id) {
 
 function constructCarSearchQuery({ make, color, category, search }) {
   let query;
-  let params;
+  let params = [];
+  let paramIndex = 1;
 
   if (search) {
-    query = carSearchQuery;
-
+    query = `SELECT * FROM cars WHERE make ILIKE $${paramIndex} OR color ILIKE $${paramIndex + 1} OR category ILIKE $${paramIndex + 2}`;
     const searchPattern = `%${search}%`;
     params = [searchPattern, searchPattern, searchPattern];
   } else {
     query = "SELECT * FROM cars WHERE 1=1";
 
-    if (make) query += ` AND make = '${make}'`;
-    if (color) query += ` AND color = '${color}'`;
-    if (category) query += ` AND category = '${category}'`;
-
-    params = [];
+    if (make) {
+      query += ` AND make = $${paramIndex}`;
+      params.push(make);
+      paramIndex++;
+    }
+    if (color) {
+      query += ` AND color = $${paramIndex}`;
+      params.push(color);
+      paramIndex++;
+    }
+    if (category) {
+      query += ` AND category = $${paramIndex}`;
+      params.push(category);
+      paramIndex++;
+    }
   }
+
   console.log({ query, params });
   return { query, params };
 }
+
 module.exports = { constructUpdateQuery, constructCarSearchQuery };
