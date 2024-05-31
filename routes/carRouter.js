@@ -9,13 +9,11 @@ router.get("/search", (req, res) => {
   carController.searchCar(req, res);
 });
 
-
-
 router.post("/create", (req, res) => {
   carController.createCar(req, res);
 });
-router.post("/favorite", (req, res) => {
-  carController.favoriteCar(req, res);
+router.post("/toggle-favorite", (req, res) => {
+  carController.toggleCarfavorite(req, res);
 });
 
 router.get("/:id", (req, res) => {

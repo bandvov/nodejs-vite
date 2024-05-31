@@ -19,17 +19,26 @@ WHERE LOWER(color) LIKE $1
 OR LOWER(make) LIKE $2 
 OR LOWER(model) LIKE $3`;
 
-async function saveFavoriteCarQuery(userId, carId) {
-  await pool.query("INSERT INTO favorites (user_id, car_id) VALUES ($1, $2)", [
-    userId,
-    carId,
-  ]);
-}
+const toggleFavoriteQuery = `BEGIN;
+
+DELETE FROM favorites
+WHERE user_id = $1 AND car_id = $2;
+
+IF FOUND THEN
+    COMMIT;
+ELSE
+    INSERT INTO favorites (user_id, car_id)
+    VALUES ($1, $2);
+    COMMIT;
+END IF;
+
+END;
+`;
 module.exports = {
   createCarQuery,
   getAllCarsQuery,
   getCarByIdQuery,
   deleteCarQuery,
   carSearchQuery,
-  saveFavoriteCarQuery,
+  toggleFavoriteQuery,
 };

@@ -3,6 +3,7 @@ import { getCars, searchCar } from "../../../api/cars.js";
 import CarCard from "../CarCard/CarCard.js";
 import "./Catalog.css";
 import { useAuth } from "../../../providers/AuthProvider.js";
+import { favoriteCar } from "../../../../../controllers/carController.js";
 
 const Catalog = () => {
   const { userId } = useAuth();
@@ -107,6 +108,9 @@ const Catalog = () => {
           <div className="content__body__elem">
             {cars?.map((car) => (
               <CarCard
+                favoriteHandler={() =>
+                  favoriteCar({ car_id: car.id, user_id: userId })
+                }
                 isFavorited={car.favorite_user_ids?.includes(+userId)}
                 key={car.id}
                 car={car}

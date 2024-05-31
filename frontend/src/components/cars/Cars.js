@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { deleteCar, favoriteCar, getCars, searchCar } from "../../api/cars";
+import { deleteCar, getCars, searchCar } from "../../api/cars";
 import CarsHeader from "../SearchPanel/SearchPanel";
 import ListItem from "../ListItem/ListItem";
 import CarDetails from "./CarDetails";
-import { useAuth } from "../../providers/AuthProvider";
 
 export default function Cars() {
   const [cars, setCars] = useState([]);
-const { userId } = useAuth();
 
   useEffect(() => {
     getCars().then((res) => {
@@ -43,7 +41,6 @@ const { userId } = useAuth();
             <ListItem
               image={car.image}
               deleteHandler={() => deleteHandler(car.id)}
-              favoriteHandler = {()=> favoriteCar({car_id: car.id,user_id: userId})}
             >
               <CarDetails showTitle car={car} />;
             </ListItem>

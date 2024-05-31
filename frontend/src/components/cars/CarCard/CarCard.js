@@ -4,7 +4,7 @@ import "./CarCard.css";
 import { ReactComponent as HeartIcon } from "./heart.svg";
 import CarDetails from "../CarDetails";
 
-const CarCard = ({ isFavorited = false, car }) => {
+const CarCard = ({ favoriteHandler, isFavorited = false, car }) => {
   const [isFavorite, setIsFavorite] = useState(isFavorited);
 
   const toggleFavorite = () => {
@@ -31,6 +31,7 @@ const CarCard = ({ isFavorited = false, car }) => {
           </button>
           <button onClick={toggleFavorite} className="heart-button">
             <HeartIcon
+              onClick={favoriteHandler}
               className={isFavorite ? "heart-icon favorite" : "heart-icon"}
             />
           </button>

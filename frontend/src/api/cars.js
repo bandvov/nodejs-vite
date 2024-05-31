@@ -13,7 +13,7 @@ export const deleteCar = async (id) => {
 };
 export const favoriteCar = async (data) => {
 const query = new URLSearchParams(data)
-  return fetch(`/cars/favorite?${query}`, { method: "POST" });
+  return fetch(`/cars/toggle-favorite?${query}`, { method: "POST" });
 };
 export const searchCar = async (query) => {
   return fetch(`/cars/search?${buildQuery(query)}`, {

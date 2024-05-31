@@ -49,8 +49,8 @@ class CarController {
       return res.json(results.rows);
     });
   }
-  favoriteCar(req, res) {
-    this.service.addFavorite(req.query, (err, results) => {
+  toggleCarfavorite(req, res) {
+    this.service.toggleFavorite(req.query, (err, results) => {
       if (err) {
         res.status(500).json({ error: err });
         return;
