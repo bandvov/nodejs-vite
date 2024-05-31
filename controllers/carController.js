@@ -6,7 +6,7 @@ class CarController {
   async getCars(req, res) {
     this.service.getAllCars((err, results) => {
       if (err) {
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: err });
         return;
       }
       res.json(results.rows);
@@ -15,7 +15,7 @@ class CarController {
   async getCarById(req, res) {
     this.service.getCarById(req.params.id, (err, result) => {
       if (err) {
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: err });
         return;
       }
       res.json(result.rows[0]);
@@ -24,7 +24,7 @@ class CarController {
   createCar(req, res) {
     this.service.createCar(req.body, (err, results) => {
       if (err) {
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: err });
         return;
       }
       return res.json(results);
@@ -34,7 +34,7 @@ class CarController {
     const { id } = req.params;
     this.service.deleteCar(id, (err, results) => {
       if (err) {
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: err });
         return;
       }
       return res.json(results);
@@ -43,7 +43,7 @@ class CarController {
   searchCar(req, res) {
     this.service.searchCar(req.query, (err, results) => {
       if (err) {
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: err });
         return;
       }
       return res.json(results.rows);

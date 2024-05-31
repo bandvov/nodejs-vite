@@ -7,7 +7,7 @@ class UserController {
   async getUsers(req, res) {
     this.service.getAllUsers((err, result) => {
       if (err) {
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: err });
         return;
       }
       res.json(result.rows);
@@ -16,7 +16,7 @@ class UserController {
   async getUserById(req, res) {
     this.service.getUserById(req.params.id, (err, result) => {
       if (err) {
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: err });
         return;
       }
       res.json(result.rows[0]);
@@ -27,7 +27,7 @@ class UserController {
     console.log(req.body);
     this.service.createUser(req.body, (err, result) => {
       if (err) {
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: err });
         return;
       }
       return res.json(result.rows);
@@ -38,7 +38,7 @@ class UserController {
     const { id } = req.params;
     this.service.updateUser(id, req.body, (err, result) => {
       if (err) {
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: err });
         return;
       }
       return res.json(result.rows[0]);
@@ -48,7 +48,7 @@ class UserController {
     const { id } = req.params;
     this.service.updateUser(id, { deleted: true }, (err, result) => {
       if (err) {
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ error: err });
         return;
       }
       return res.json(result.rows[0]);
@@ -61,7 +61,7 @@ class UserController {
       [`%${searchTerm}%`, `%${searchTerm}%`, `%${searchTerm}%`],
       (err, result) => {
         if (err) {
-          res.status(500).json({ error: "Internal Server Error" });
+          res.status(500).json({ error: err });
           return;
         }
         return res.json(result.rows);
