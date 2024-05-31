@@ -10,14 +10,14 @@ passport.use(
   new LocalStrategy({ usernameField: "login" }, (login, password, done) => {
     userService.getUserByLogin(login, (err, result) => {
       console.log({ result });
-      if (!result.length) {
+      if (!result.rows.length) {
         return done(null, false, { message: "That email is not registered" });
       }
 
-      bcrypt.compare(password, result[0].password, (err, isMatch) => {
+      bcrypt.compare(password, result.rows[0].password, (err, isMatch) => {
         if (err) throw err;
         if (isMatch) {
-          return done(null, true, result[0]);
+          return done(null, true, result.rows[0]);
         } else {
           return done(null, false, { message: "Password incorrect" });
         }
