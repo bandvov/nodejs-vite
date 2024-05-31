@@ -5,12 +5,12 @@ class UserController {
     this.service = service;
   }
   async getUsers(req, res) {
-    this.service.getAllUsers((err, results) => {
+    this.service.getAllUsers((err, result) => {
       if (err) {
         res.status(500).json({ error: "Internal Server Error" });
         return;
       }
-      res.json(results);
+      res.json(result.rows);
     });
   }
   async getUserById(req, res) {
@@ -19,39 +19,39 @@ class UserController {
         res.status(500).json({ error: "Internal Server Error" });
         return;
       }
-      res.json(result[0]);
+      res.json(result.rows[0]);
     });
   }
 
   createUser(req, res) {
     console.log(req.body);
-    this.service.createUser(req.body, (err, results) => {
+    this.service.createUser(req.body, (err, result) => {
       if (err) {
         res.status(500).json({ error: "Internal Server Error" });
         return;
       }
-      return res.json(results);
+      return res.json(result.rows);
     });
   }
 
   updateUser(req, res) {
     const { id } = req.params;
-    this.service.updateUser(id, req.body, (err, results) => {
+    this.service.updateUser(id, req.body, (err, result) => {
       if (err) {
         res.status(500).json({ error: "Internal Server Error" });
         return;
       }
-      return res.json(results);
+      return res.json(result.rows[0]);
     });
   }
   deleteUser(req, res) {
     const { id } = req.params;
-    this.service.updateUser(id, { deleted: true }, (err, results) => {
+    this.service.updateUser(id, { deleted: true }, (err, result) => {
       if (err) {
         res.status(500).json({ error: "Internal Server Error" });
         return;
       }
-      return res.json(results);
+      return res.json(result.rows[0]);
     });
   }
   searchUser(req, res) {
@@ -59,12 +59,12 @@ class UserController {
     const searchTerm = search.toLowerCase();
     this.service.searchUser(
       [`%${searchTerm}%`, `%${searchTerm}%`, `%${searchTerm}%`],
-      (err, results) => {
+      (err, result) => {
         if (err) {
           res.status(500).json({ error: "Internal Server Error" });
           return;
         }
-        return res.json(results);
+        return res.json(result.rows);
       }
     );
   }
