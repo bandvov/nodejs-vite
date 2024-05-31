@@ -1,6 +1,6 @@
 export const getUsers = async () => {
   return fetch(`/users`).then((res) => {
-    return res.json();
+    return res?.json();
   });
 };
 export const createUser = async (data) => {
@@ -11,7 +11,7 @@ export const createUser = async (data) => {
       "Content-Type": "application/json",
     },
   }).then((res) => {
-    return res.json();
+    return res?.json();
   });
 };
 export const login = async (data) => {
@@ -23,7 +23,7 @@ export const login = async (data) => {
     },
     credentials: "include",
   }).then((res) => {
-    return res.json();
+    return res?.json();
   });
 };
 export const blockUser = async (id) => {
@@ -36,7 +36,7 @@ export const blockUser = async (id) => {
       "Content-Type": "application/json",
     },
   }).then((res) => {
-    return res.json();
+    return res?.json();
   });
 };
 
