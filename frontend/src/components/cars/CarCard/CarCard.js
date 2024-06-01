@@ -8,7 +8,7 @@ const CarCard = ({ favoriteHandler, isFavorited = false, car }) => {
   const [isFavorite, setIsFavorite] = useState(isFavorited);
 
   const toggleFavorite = () => {
-    favoriteHandler().the((res) => {
+    favoriteHandler().then((res) => {
       if (res.success) {
         setIsFavorite(!isFavorite);
       }
