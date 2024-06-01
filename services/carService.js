@@ -44,10 +44,10 @@ class CarService {
     this.db.query(query, params, callback);
   }
   addFavorite(data, callback) {
-    this.db.query(addFavoriteQuery, [data.user_id, data.car_id], callback);
+    this.db.query(addFavoriteQuery, [+data.user_id, +data.car_id], callback);
   }
   deleteFavorite(data, callback) {
-    this.db.query(deleteCarQuery, [data.user_id, data.car_id], callback);
+    this.db.query(deleteCarQuery, [+data.user_id, +data.car_id], callback);
   }
   // Add more database operations here
 }
