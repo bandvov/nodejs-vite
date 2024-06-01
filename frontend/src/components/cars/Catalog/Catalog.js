@@ -105,16 +105,22 @@ const Catalog = () => {
         <div className="blue-line"></div>
         <div className="body__content">
           <div className="content__body__elem">
-            {cars?.map((car) => (
-              <CarCard
-                favoriteHandler={async () =>
-                  favoriteCar({ car_id: car.id, user_id: userId })
-                }
-                isFavorited={car.favorite_user_ids?.includes(+userId)}
-                key={car.id}
-                car={car}
-              />
-            ))}
+            {cars?.map((car) => {
+              const isFavorited = car.favorite_user_ids?.includes(+userId);
+              return (
+                <CarCard
+                  favoriteHandler={async () =>
+                    favoriteCar(
+                      { car_id: car.id, user_id: userId },
+                      isFavorited ? "DELETE" : "POST"
+                    )
+                  }
+                  isFavorited={isFavorited}
+                  key={car.id}
+                  car={car}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
