@@ -20,6 +20,7 @@ class MySQLDatabase {
     this.pool = new Pool(config);
   }
   query(sql, args, callback) {
+    console.log({ sql });
     this.pool.connect((err, connection) => {
       if (err) {
         console.error("Error getting connection from pool: " + err.stack);

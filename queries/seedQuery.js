@@ -31,11 +31,9 @@ CREATE TABLE IF NOT EXISTS cars (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 CREATE TABLE favorites (
-  user_id INT NOT NULL,
-  car_id INT NOT NULL,
-  PRIMARY KEY (user_id, car_id),
-  FOREIGN KEY (user_id) REFERENCES users(id),
-  FOREIGN KEY (car_id) REFERENCES cars(id)
+    user_id INT REFERENCES users(id),
+    car_id INT REFERENCES cars(id),
+    PRIMARY KEY (user_id, car_id)
 );
 `;
 
