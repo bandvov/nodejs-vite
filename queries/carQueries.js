@@ -10,8 +10,8 @@ GROUP BY c.id;
 
 `;
 
-const getCarByIdQuery = "SELECT * FROM cars WHERE id = $1;";
-const deleteCarQuery = "DELETE FROM cars WHERE id = $1;";
+const getCarByIdQuery = "SELECT * FROM cars WHERE id = $1";
+const deleteCarQuery = "DELETE FROM cars WHERE id = $1";
 const carSearchQuery = `
 SELECT id, make, model, image, year, price_per_hour, type, color, category
 FROM cars
