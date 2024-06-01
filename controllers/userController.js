@@ -41,7 +41,7 @@ class UserController {
         res.status(500).json({ error: err });
         return;
       }
-      return res.json(result.rows[0]);
+      return res.json({ success: true });
     });
   }
   deleteUser(req, res) {
@@ -51,7 +51,7 @@ class UserController {
         res.status(500).json({ error: err });
         return;
       }
-      return res.json(result.rows[0]);
+      return res.json({ success: true });
     });
   }
   searchUser(req, res) {
