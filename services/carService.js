@@ -6,7 +6,10 @@ const {
 } = require("../queries/carQueries");
 const db = require("../database/database");
 const { constructCarSearchQuery } = require("../utils");
-const { addFavoriteQuery } = require("../queries/favoriteQueries");
+const {
+  addFavoriteQuery,
+  deleteFavoriteQuery,
+} = require("../queries/favoriteQueries");
 
 class CarService {
   constructor(db) {
@@ -47,7 +50,7 @@ class CarService {
     this.db.query(addFavoriteQuery, [+data.user_id, +data.car_id], callback);
   }
   deleteFavorite(data, callback) {
-    this.db.query(deleteCarQuery, [+data.user_id, +data.car_id], callback);
+    this.db.query(deleteFavoriteQuery, [+data.user_id, +data.car_id], callback);
   }
   // Add more database operations here
 }
