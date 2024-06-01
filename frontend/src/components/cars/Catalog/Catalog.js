@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getCars, searchCar } from "../../../api/cars.js";
+import { favoriteCar, getCars, searchCar } from "../../../api/cars.js";
 import CarCard from "../CarCard/CarCard.js";
 import "./Catalog.css";
 import { useAuth } from "../../../providers/AuthProvider.js";
-import { favoriteCar } from "../../../../../controllers/carController.js";
 
 const Catalog = () => {
   const { userId } = useAuth();
