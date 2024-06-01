@@ -108,7 +108,7 @@ const Catalog = () => {
             {cars?.map((car) => (
               <CarCard
                 favoriteHandler={async () =>
-                  favoriteCar({ car_id: car.id, user_id: userId })
+                  favoriteCar({ car_id: car.id, user_id: +userId })
                 }
                 isFavorited={car.favorite_user_ids?.includes(+userId)}
                 key={car.id}
