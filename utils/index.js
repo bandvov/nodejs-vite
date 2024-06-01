@@ -23,7 +23,7 @@ function constructUpdateQuery(table, updates, id) {
     query = `
     UPDATE ${table}
     SET ${fields.join(", ")}
-    WHERE id = ?
+    WHERE id = $1
     `;
   } else {
     query = `
