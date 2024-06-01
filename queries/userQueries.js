@@ -14,14 +14,10 @@ FROM users
 WHERE LOWER(email) LIKE  $1
 OR LOWER(first_name) LIKE $2 
 OR LOWER(last_name) LIKE $3;`;
-const deleteUserQuery = `UPDATE users
-SET deleted = true
-WHERE id = $1`;
 module.exports = {
   getAllUsersQuery,
   getUserByIdQuery,
   getUserByLoginQuery,
   userSearchQuery,
   createUserQuery,
-  deleteUserQuery,
 };

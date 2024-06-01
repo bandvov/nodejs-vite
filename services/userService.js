@@ -28,12 +28,8 @@ class UserService {
 
   updateUser(id, data, callback) {
     const { query, values } = constructUpdateQuery("users", data, id);
-    console.log({query});
+    console.log({ query, values });
     this.db.query(query, values, callback);
-  }
-
-  deleteUser(id, callback) {
-    this.db.query(deleteUserQuery, [id], callback);
   }
 
   searchUser(data, callback) {

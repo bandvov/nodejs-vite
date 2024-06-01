@@ -5,35 +5,36 @@ require("dotenv").config();
 function constructUpdateQuery(table, updates, id) {
   const fields = [];
   const values = [];
+  let paramIndex = 1;  // Start parameter index at 1 for SQL placeholders
 
   for (const [key, value] of Object.entries(updates)) {
-    fields.push(`${key} = ?`);
+    fields.push(`${key} = $${paramIndex}`);
     values.push(value);
+    paramIndex++;
   }
 
   if (fields.length === 0) {
     throw new Error("No fields to update.");
   }
-  if (id) {
-    values.push(id);
-  }
 
   let query;
   if (id) {
     query = `
-    UPDATE ${table}
-    SET ${fields.join(", ")}
-    WHERE id = $1
+      UPDATE ${table}
+      SET ${fields.join(", ")}
+      WHERE id = $${paramIndex}
     `;
+    values.push(id);
   } else {
     query = `
-    UPDATE ${table}
-    SET ${fields.join(", ")} 
+      UPDATE ${table}
+      SET ${fields.join(", ")}
     `;
   }
 
   return { query, values };
 }
+
 
 function constructCarSearchQuery({ make, color, category, search }) {
   let query;
