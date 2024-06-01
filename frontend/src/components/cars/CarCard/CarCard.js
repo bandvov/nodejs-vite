@@ -8,7 +8,11 @@ const CarCard = ({ favoriteHandler, isFavorited = false, car }) => {
   const [isFavorite, setIsFavorite] = useState(isFavorited);
 
   const toggleFavorite = () => {
-    setIsFavorite(!isFavorite);
+    favoriteHandler().the((res) => {
+      if (res.success) {
+        setIsFavorite(!isFavorite);
+      }
+    });
   };
   return (
     <div className="CarCard">
@@ -31,7 +35,6 @@ const CarCard = ({ favoriteHandler, isFavorited = false, car }) => {
           </button>
           <button onClick={toggleFavorite} className="heart-button">
             <HeartIcon
-              onClick={favoriteHandler}
               className={isFavorite ? "heart-icon favorite" : "heart-icon"}
             />
           </button>

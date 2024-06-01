@@ -3,10 +3,10 @@ const {
   createCarQuery,
   getCarByIdQuery,
   deleteCarQuery,
-  toggleFavoriteQuery,
 } = require("../queries/carQueries");
 const db = require("../database/database");
 const { constructCarSearchQuery } = require("../utils");
+const { addFavoriteQuery } = require("../queries/favoriteQueries");
 
 class CarService {
   constructor(db) {
@@ -43,8 +43,11 @@ class CarService {
     const { query, params } = constructCarSearchQuery(data);
     this.db.query(query, params, callback);
   }
-  toggleFavorite(data, callback) {
-    this.db.query(toggleFavoriteQuery, [data.user_id, data.car_id], callback);
+  addFavorite(data, callback) {
+    this.db.query(addFavoriteQuery, [data.user_id, data.car_id], callback);
+  }
+  deleteFavorite(data, callback) {
+    this.db.query(deleteCarQuery, [data.user_id, data.car_id], callback);
   }
   // Add more database operations here
 }

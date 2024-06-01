@@ -49,13 +49,22 @@ class CarController {
       return res.json(results.rows);
     });
   }
-  toggleCarfavorite(req, res) {
-    this.service.toggleFavorite(req.query, (err, results) => {
+  addCarfavorite(req, res) {
+    this.service.addFavorite(req.query, (err, results) => {
       if (err) {
         res.status(500).json({ error: err });
         return;
       }
-      return res.json(results.rows);
+      return res.json({ success: true });
+    });
+  }
+  deleteCarfavorite(req, res) {
+    this.service.deleteFavorite(req.query, (err, results) => {
+      if (err) {
+        res.status(500).json({ error: err });
+        return;
+      }
+      return res.json({ success: true });
     });
   }
 }
