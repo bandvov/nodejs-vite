@@ -1,4 +1,4 @@
 export const loginFacebook = () => {
   console.log(window.location);
-  window.location = "/auth/facebook";
+  window.location = "/api/auth/facebook";
 };

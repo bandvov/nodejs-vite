@@ -1,17 +1,17 @@
 export const getUsers = async () => {
-  return fetch(`/users`).then((res) => {
+  return fetch(`/api/users`).then((res) => {
     return res?.json();
   });
 };
 
 export const getUserById = async (id) => {
-  return fetch(`/users/${id}`).then((res) => {
+  return fetch(`/api/users/${id}`).then((res) => {
     return res.json();
   });
 };
 
 export const createUser = async (data) => {
-  return fetch(`/users/register`, {
+  return fetch(`/api/users/register`, {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
@@ -23,7 +23,7 @@ export const createUser = async (data) => {
 };
 
 export const login = async (data) => {
-  return fetch(`/auth/login`, {
+  return fetch(`/api/auth/login`, {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
@@ -35,7 +35,7 @@ export const login = async (data) => {
   });
 };
 export const blockUser = async (id) => {
-  return fetch(`/users/${id}`, {
+  return fetch(`/api/users/${id}`, {
     method: "PATCH",
     body: JSON.stringify({
       blocked: true,
@@ -49,12 +49,12 @@ export const blockUser = async (id) => {
 };
 
 export const deleteUser = async (id) => {
-  return fetch(`/users/${id}`, {
+  return fetch(`/api/users/${id}`, {
     method: "DELETE",
   });
 };
 export const searchUser = async (query) => {
-  return fetch(`/users/search?search=${query}`, {
+  return fetch(`/api/users/search?search=${query}`, {
     method: "GET",
   }).then((res) => {
     return res.json();
