@@ -29,6 +29,7 @@ router.post("/login", (req, res, next) => {
           email: info.email,
           first_name: info.first_name,
           last_name: info.last_name,
+          image: info.image,
         });
       });
     }
