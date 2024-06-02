@@ -31,7 +31,7 @@ const CarCard = ({ favoriteHandler, isFavorited = false, car }) => {
             type="submit"
             className="elem__button__elements"
             onClick={() => {
-              navigate(`/${car.id}`);
+              navigate(`/catalog/${car.id}`);
             }}
           >
             {car.price_per_hour > 0 ? "Орендувати" : "Недоступно для оренди"}
