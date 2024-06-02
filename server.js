@@ -8,11 +8,12 @@ const authRouter = require("./routes/authRouter");
 const session = require("express-session");
 const passport = require("./passport");
 const cookieParser = require("cookie-parser");
+require("dotenv").config();
 
 // Enable all CORS requests
 app.use(
   cors({
-    origin: "*", // Replace with the URL of your React app
+    origin: process.env.ORIGIN || "*", // Replace with the URL of your React app
     credentials: true,
   })
 );
