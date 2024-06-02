@@ -3,6 +3,13 @@ export const getUsers = async () => {
     return res?.json();
   });
 };
+
+export const getUserById = async (id) => {
+  return fetch(`/users/${id}`).then((res) => {
+    return res.json();
+  });
+};
+
 export const createUser = async (data) => {
   return fetch(`/users/register`, {
     method: "POST",
@@ -14,6 +21,7 @@ export const createUser = async (data) => {
     return res?.json();
   });
 };
+
 export const login = async (data) => {
   return fetch(`/auth/login`, {
     method: "POST",
