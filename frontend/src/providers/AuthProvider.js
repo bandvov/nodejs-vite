@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
     if (userId) {
       setUserId(id);
     }
-    if (userImage) {
+    if (image) {
       setUserImage(image);
     }
   }, []);
