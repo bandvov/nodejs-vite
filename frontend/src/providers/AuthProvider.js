@@ -8,20 +8,21 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [userName, setUserName] = useState(null);
   const [userId, setUserId] = useState(null);
+  const [userImage, setUserImage] = useState(null);
 
   useEffect(() => {
     // Check for user data in cookies on initial render
-    const userName = Cookies.get("user_name");
-    const userId = Cookies.get("user_id");
-    const userImage = Cookies.get("user_image");
-    if (userName) {
-      setUserName(userName);
+    const name = Cookies.get("user_name");
+    const id = Cookies.get("user_id");
+    const image = Cookies.get("user_image");
+    if (name) {
+      setUserName(name);
     }
     if (userId) {
-      setUserId(userId);
+      setUserId(id);
     }
     if (userImage) {
-      setUserId(userImage);
+      setUserImage(image);
     }
   }, []);
 
