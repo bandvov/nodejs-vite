@@ -37,6 +37,7 @@ export const AuthProvider = ({ children }) => {
     // Logic to log out user
     setUserName(null);
     setUserId(null);
+    setUserImage(null);
     Cookies.remove("user_name");
     Cookies.remove("user_id");
     Cookies.remove("user_image");
