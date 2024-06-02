@@ -37,13 +37,13 @@ app.use("/api/auth", authRouter);
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, "frontend/build")));
+// // Serve static files from the React app
+// app.use(express.static(path.join(__dirname, "frontend/build")));
 
-// Handles any requests that don't match the ones above
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/frontend/build/index.html"));
-});
+// // Handles any requests that don't match the ones above
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname + "/frontend/build/index.html"));
+// });
 
 // Start the serverconst PORT = 3000;
 app.listen(PORT, () => {
