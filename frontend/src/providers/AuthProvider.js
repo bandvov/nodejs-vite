@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
     // Check for user data in cookies on initial render
     const userName = Cookies.get("user_name");
     const userId = Cookies.get("user_id");
-    const userImage = Cookies.get("userImage");
+    const userImage = Cookies.get("user_image");
     if (userName) {
       setUserName(userName);
     }
