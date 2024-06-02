@@ -13,18 +13,23 @@ export const AuthProvider = ({ children }) => {
     // Check for user data in cookies on initial render
     const userName = Cookies.get("user_name");
     const userId = Cookies.get("user_id");
+    const userImage = Cookies.get("userImage");
     if (userName) {
       setUserName(userName);
     }
     if (userId) {
       setUserId(userId);
     }
+    if (userImage) {
+      setUserId(userImage);
+    }
   }, []);
 
-  const login = ({ userName, userId }) => {
+  const login = ({ userName, userId, userImage }) => {
     // Logic to authenticate user
     setUserName(userName);
     setUserId(userId);
+    setUserId(userImage);
   };
 
   const logout = () => {
@@ -33,6 +38,7 @@ export const AuthProvider = ({ children }) => {
     setUserId(null);
     Cookies.remove("user_name");
     Cookies.remove("user_id");
+    Cookies.remove("user_image");
   };
 
   return (

@@ -38,6 +38,7 @@ const LoginForm = () => {
               addUserDataToStore({
                 userName: res.first_name + " " + res.last_name,
                 userId: res.id,
+                userImage: res.image,
               });
               navigate("/");
             } else {

@@ -3,7 +3,7 @@ import "./Header.css";
 import { useAuth } from "../../providers/AuthProvider";
 
 const Header = () => {
-  const { userName } = useAuth();
+  const { userName, userImage } = useAuth();
 
   return (
     <section className="header-section">
@@ -39,7 +39,17 @@ const Header = () => {
 
             <li className="main-nav-list-item">
               {userName ? (
-                <h3 className="main-nav-link">{userName}</h3>
+                <a className="main-nav-link" href="/profile">
+                  <img
+                    src={userImage}
+                    alt="Avatar"
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      borderRadius: "50%",
+                    }}
+                  />
+                </a>
               ) : (
                 <a href="/auth/login" className="main-nav-link">
                   Увійти

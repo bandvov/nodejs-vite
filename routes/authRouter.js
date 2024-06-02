@@ -22,10 +22,11 @@ router.post("/login", (req, res, next) => {
         });
 
         res.cookie("user_name", info.first_name + " " + info.last_name);
+        res.cookie("userImage", info.image);
 
         res.json({
           success: true,
-          id: 4,
+          id: info.id,
           email: info.email,
           first_name: info.first_name,
           last_name: info.last_name,
