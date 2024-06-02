@@ -14,15 +14,22 @@ router.post("/login", (req, res, next) => {
         // Generate the token
         var token = jwt.sign({ email: info.email }, "shhhhh");
         console.log({ token });
-        res.cookie("access_token", token, { httpOnly: true, secure: true });
+        res.cookie("access_token", token, {
+          httpOnly: true,
+          secure: true,
+          domain: process.env.ORIGIN,
+        });
 
         res.cookie("user_id", info.id, {
           httpOnly: false,
           secure: false,
+          domain: process.env.ORIGIN,
         });
 
-        res.cookie("user_name", info.first_name + " " + info.last_name);
-        res.cookie("user_image", info.image);
+        res.cookie("user_name", info.first_name + " " + info.last_name, {
+          domain: process.env.ORIGIN,
+        });
+        res.cookie("user_image", info.image, { domain: process.env.ORIGIN });
 
         res.json({
           success: true,
@@ -47,21 +54,26 @@ router.get(
     res.cookie("facebook_user_id", req.user.profile.id, {
       httpOnly: true,
       secure: false,
+      domain: process.env.ORIGIN,
     });
 
     res.cookie("access_token", req.user.accessToken, {
       httpOnly: true,
       secure: false,
+      domain: process.env.ORIGIN,
     });
 
     res.cookie("user_id", 1, {
       httpOnly: false,
       secure: false,
+      domain: process.env.ORIGIN,
     });
 
-    res.cookie("user_name", req.user.profile.displayName);
+    res.cookie("user_name", req.user.profile.displayName, {
+      domain: process.env.ORIGIN,
+    });
 
-    res.redirect("/");
+    res.redirect(process.env.REDIRECT_URL);
   }
 );
 
