@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import "./CarCard.css";
 import { ReactComponent as HeartIcon } from "./heart.svg";
 import CarDetails from "../CarDetails";
+import { useNavigate } from "react-router-dom";
 
 const CarCard = ({ favoriteHandler, isFavorited = false, car }) => {
   const [isFavorite, setIsFavorite] = useState(isFavorited);
-
+  const navigate = useNavigate();
   const toggleFavorite = () => {
     favoriteHandler().then((res) => {
       if (res.success) {
@@ -29,7 +30,9 @@ const CarCard = ({ favoriteHandler, isFavorited = false, car }) => {
           <button
             type="submit"
             className="elem__button__elements"
-            name={car.id}
+            onClick={() => {
+              navigate(`/${car.id}`);
+            }}
           >
             {car.price_per_hour > 0 ? "Орендувати" : "Недоступно для оренди"}
           </button>

@@ -8,6 +8,7 @@ import MainPage from "./components/MainPage/MainPage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Catalog from "./components/cars/Catalog/Catalog";
+import Booking from "./components/Booking/Booking";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/catalog" element={<Catalog />} />
+        <Route path="/catalog/:id" element={<Booking />} />
 
         <Route path="/auth/login" element={<LoginForm />} />
         <Route path="/auth/registration" element={<RegistrationForm />} />
