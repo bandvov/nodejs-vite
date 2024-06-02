@@ -1,11 +1,11 @@
 export const getUsers = async () => {
-  return fetch(process.env.REACT_APP_API_URL + `/api/users`).then((res) => {
+  return fetch(process.env.REACT_APP_API_URL + `/users`).then((res) => {
     return res?.json();
   });
 };
 
 export const getUserById = async (id) => {
-  return fetch(process.env.REACT_APP_API_URL + `/api/users/${id}`).then(
+  return fetch(process.env.REACT_APP_API_URL + `/users/${id}`).then(
     (res) => {
       return res.json();
     }
@@ -13,7 +13,7 @@ export const getUserById = async (id) => {
 };
 
 export const createUser = async (data) => {
-  return fetch(process.env.REACT_APP_API_URL + `/api/users/register`, {
+  return fetch(process.env.REACT_APP_API_URL + `/users/register`, {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
@@ -25,7 +25,7 @@ export const createUser = async (data) => {
 };
 
 export const login = async (data) => {
-  return fetch(process.env.REACT_APP_API_URL + `/api/auth/login`, {
+  return fetch(process.env.REACT_APP_API_URL + `/auth/login`, {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
@@ -37,7 +37,7 @@ export const login = async (data) => {
   });
 };
 export const blockUser = async (id) => {
-  return fetch(process.env.REACT_APP_API_URL + `/api/users/${id}`, {
+  return fetch(process.env.REACT_APP_API_URL + `/users/${id}`, {
     method: "PATCH",
     body: JSON.stringify({
       blocked: true,
@@ -51,13 +51,13 @@ export const blockUser = async (id) => {
 };
 
 export const deleteUser = async (id) => {
-  return fetch(process.env.REACT_APP_API_URL + `/api/users/${id}`, {
+  return fetch(process.env.REACT_APP_API_URL + `/users/${id}`, {
     method: "DELETE",
   });
 };
 export const searchUser = async (query) => {
   return fetch(
-    process.env.REACT_APP_API_URL + `/api/users/search?search=${query}`,
+    process.env.REACT_APP_API_URL + `/users/search?search=${query}`,
     {
       method: "GET",
     }
