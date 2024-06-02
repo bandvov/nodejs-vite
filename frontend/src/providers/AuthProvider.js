@@ -42,7 +42,11 @@ export const AuthProvider = ({ children }) => {
     Cookies.remove("user_id");
     Cookies.remove("user_image");
   };
-
+  console.log({
+    userId,
+    userImage,
+    userName,
+  });
   return (
     <AuthContext.Provider
       value={{ userName, userId, userImage, login, logout }}
