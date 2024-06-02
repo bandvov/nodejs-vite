@@ -8,7 +8,7 @@ import MainPage from "./components/MainPage/MainPage";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import Catalog from "./components/cars/Catalog/Catalog";
-import Booking from "./components/Booking/Booking";
+import Booking from "./components/booking/Booking";
 
 function App() {
   return (
