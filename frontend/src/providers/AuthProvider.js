@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     // Logic to authenticate user
     setUserName(userName);
     setUserId(userId);
-    setUserId(userImage);
+    setUserImage(userImage);
   };
 
   const logout = () => {
