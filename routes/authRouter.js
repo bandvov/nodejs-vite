@@ -18,18 +18,24 @@ router.post("/login", (req, res, next) => {
           httpOnly: true,
           secure: true,
           domain: process.env.ORIGIN,
+          sameSite: false,
         });
 
         res.cookie("user_id", info.id, {
           httpOnly: false,
           secure: false,
           domain: process.env.ORIGIN,
+          sameSite: false,
         });
 
         res.cookie("user_name", info.first_name + " " + info.last_name, {
           domain: process.env.ORIGIN,
+          sameSite: false,
         });
-        res.cookie("user_image", info.image, { domain: process.env.ORIGIN });
+        res.cookie("user_image", info.image, {
+          domain: process.env.ORIGIN,
+          sameSite: false,
+        });
 
         res.json({
           success: true,
@@ -55,22 +61,26 @@ router.get(
       httpOnly: true,
       secure: false,
       domain: process.env.ORIGIN,
+      sameSite: false,
     });
 
     res.cookie("access_token", req.user.accessToken, {
       httpOnly: true,
       secure: false,
       domain: process.env.ORIGIN,
+      sameSite: false,
     });
 
     res.cookie("user_id", 1, {
       httpOnly: false,
       secure: false,
       domain: process.env.ORIGIN,
+      sameSite: false,
     });
 
     res.cookie("user_name", req.user.profile.displayName, {
       domain: process.env.ORIGIN,
+      sameSite: false,
     });
 
     res.redirect(process.env.REDIRECT_URL);
