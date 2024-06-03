@@ -30,10 +30,10 @@ export default function Booking() {
               style={{
                 objectFit: "booking-container-contain",
               }}
-              alt="woohee"
+              alt={carDetails?.make + " " + carDetails?.model}
               width="100%"
               height="300px"
-              src="https://i.mydramalist.com/e3Q0pc.jpg"
+              src={carDetails?.image}
             />
           </div>
           <div className="booking-container-details">
