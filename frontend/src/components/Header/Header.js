@@ -5,11 +5,13 @@ import { getUserProfile } from "../../api/users";
 
 const Header = () => {
   const { user, login } = useAuth();
-  
+
   useEffect(() => {
-    getUserProfile().then((res) => {
-      login(res.data);
-    });
+    // if (user.id) {
+    //   getUserProfile().then((res) => {
+    //     login(res.data);
+    //   });
+    // }
   }, []);
 
   return (
