@@ -21,6 +21,7 @@ export default function Booking() {
       setCarDetaisl(res);
       console.log({ res });
     });
+    console.log({ user });
     getUserById(user?.id).then((res) => {
       setUserData(res);
     });
