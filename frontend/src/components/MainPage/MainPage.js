@@ -14,7 +14,7 @@ const MainPage = () => {
             </h1>
             <p className="hero-text">Відкрийте новий світ автомобільних подорожей</p>
             <div className="hero-btn-wrapper">
-              <a href="patvgj" className="rent-link">Орендувати</a>
+              <a href="/catalog" className="rent-link">Орендувати</a>
               <button type="button" className="download-btn">
                 Завантажити додаток
               </button>
