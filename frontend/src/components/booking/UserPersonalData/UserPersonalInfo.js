@@ -5,7 +5,7 @@ import DetailItem from "../../Details/DetailItem";
 export default function UserPersonalInfo({ user }) {
   return (
     <div className="personal-data-container">
-      <Details title={"Персональна інформація"}>
+      <Details title={"Осибиста інформація"}>
         <DetailItem
           name={"ПІБ:"}
           value={
