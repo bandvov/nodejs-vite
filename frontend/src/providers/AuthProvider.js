@@ -9,17 +9,17 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     // Check for user data in cookies on initial render
-    const user = JSON.parse(localStorage.getItem("user"));
+    localStorage.getItem("user");
 
     if (user) {
-      setUser(user);
+      setUser(JSON.parse(user));
     }
   }, []);
 
   const login = (user) => {
     // Logic to authenticate user
     setUser(user);
-    localStorage.setItem("user", JSON.stringify(user))
+    localStorage.setItem("user", JSON.stringify(user));
   };
 
   const logout = () => {
