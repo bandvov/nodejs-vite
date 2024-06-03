@@ -7,6 +7,13 @@ export const getCars = async () => {
     return res.json();
   });
 };
+export const getCarById = async (id) => {
+  return fetch(process.env.REACT_APP_API_URL + `/cars/${id}`, {
+    credentials: "include",
+  }).then((res) => {
+    return res.json();
+  });
+};
 
 export const deleteCar = async (id) => {
   return fetch(process.env.REACT_APP_API_URL + `/cars/${id}`, {

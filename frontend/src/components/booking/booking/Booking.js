@@ -4,12 +4,15 @@ import CarDetails from "../../cars/CarDetails";
 import DatePick from "../DatePick/DatePick";
 import Divider from "../divider/Divider";
 import UserPersonalInfo from "../UserPersonalData/UserPersonalInfo";
-import { getUserById } from "../../../api/users";
+import { useParams } from "react-router-dom";
+import { getCarById } from "../../../api/cars";
 
 export default function Booking() {
-  const [userData, setUserData] = useState(null);
+  const { id } = useParams();
+  const [carDetails, setCarDetaisl] = useState(null);
   useEffect(() => {
-    getUserById().then((res) => {
+    getCarById(id).then((res) => {
+      setCarDetaisl(res);
       console.log({ res });
     });
   });
