@@ -25,4 +25,12 @@ router.delete("/:id", (req, res) => {
   userController.deleteUser(req, res);
 });
 
+// Profile route to display user data
+router.get('/profile', (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/');
+  }
+  res.json(req.user); // Send the user profile data as a response
+});
+
 module.exports = router;

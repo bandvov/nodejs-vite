@@ -20,25 +20,6 @@ router.post("/login", (req, res, next) => {
           secure: true,
           sameSite: "None",
         });
-
-        res.cookie("user_id", info.id, {
-          domain: process.env.COOKIE_DOMAIN,
-          httpOnly: false,
-          secure: false,
-          sameSite: "None",
-        });
-
-        res.cookie("user_name", info.first_name + " " + info.last_name, {
-          domain: process.env.COOKIE_DOMAIN,
-          secure: false,
-          sameSite: "None",
-        });
-        res.cookie("user_image", info.image, {
-          domain: process.env.COOKIE_DOMAIN,
-          secure: false,
-          sameSite: "None",
-        });
-
         res.json({
           success: true,
           id: info.id,
@@ -59,30 +40,10 @@ router.get(
   function (req, res) {
     console.log("here", req.user);
     // Successful authentication, set a cookie and redirect home
-    res.cookie("facebook_user_id", req.user.profile.id, {
-      httpOnly: true,
-      secure: false,
-      domain: process.env.COOKIE_DOMAIN,
-      sameSite: "None",
-    });
-
     res.cookie("access_token", req.user.accessToken, {
       httpOnly: true,
-      secure: false,
+      secure: true,
       domain: process.env.COOKIE_DOMAIN,
-      sameSite: "None",
-    });
-
-    res.cookie("user_id", 1, {
-      httpOnly: false,
-      secure: false,
-      domain: process.env.COOKIE_DOMAIN,
-      sameSite: "None",
-    });
-
-    res.cookie("user_name", req.user.profile.displayName, {
-      domain: process.env.COOKIE_DOMAIN,
-      secure: false,
       sameSite: "None",
     });
 

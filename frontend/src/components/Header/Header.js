@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Header.css";
 import { useAuth } from "../../providers/AuthProvider";
+import { getUserProfile } from "../../api/users";
 
 const Header = () => {
-  const { userName, userImage } = useAuth();
+  const { user, login } = useAuth();
+  
+  useEffect(() => {
+    getUserProfile().then((res) => {
+      login(res.data);
+    });
+  }, []);
 
   return (
     <section className="header-section">
@@ -38,10 +45,10 @@ const Header = () => {
             </li>
 
             <li className="main-nav-list-item">
-              {userName ? (
+              {user ? (
                 <a className="main-nav-link" href="/profile">
                   <img
-                    src={userImage}
+                    src={user.image}
                     alt="Avatar"
                     style={{
                       width: "50px",

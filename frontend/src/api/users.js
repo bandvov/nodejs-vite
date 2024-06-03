@@ -5,11 +5,16 @@ export const getUsers = async () => {
 };
 
 export const getUserById = async (id) => {
-  return fetch(process.env.REACT_APP_API_URL + `/users/${id}`).then(
-    (res) => {
-      return res.json();
-    }
-  );
+  return fetch(process.env.REACT_APP_API_URL + `/users/${id}`).then((res) => {
+    return res.json();
+  });
+};
+export const getUserProfile = async () => {
+  return fetch(process.env.REACT_APP_API_URL + `/users/profile`, {
+    credentials: "include",
+  }).then((res) => {
+    return res.json();
+  });
 };
 
 export const createUser = async (data) => {
