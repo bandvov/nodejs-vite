@@ -36,9 +36,9 @@ const LoginForm = () => {
           login(values).then((res) => {
             if (res.success) {
               addUserDataToStore({
-                userName: res.first_name + " " + res.last_name,
-                userId: res.id,
-                userImage: res.image,
+                name: res.first_name + " " + res.last_name,
+                id: res.id,
+                image: res.image,
               });
               navigate("/");
             } else {
