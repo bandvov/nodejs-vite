@@ -6,16 +6,19 @@ import Divider from "../divider/Divider";
 import UserPersonalInfo from "../UserPersonalData/UserPersonalInfo";
 import { useParams } from "react-router-dom";
 import { getCarById } from "../../../api/cars";
+import { useAuth } from "../../../providers/AuthProvider";
 
 export default function Booking() {
   const { id } = useParams();
+  const { user } = useAuth();
+
   const [carDetails, setCarDetaisl] = useState(null);
   useEffect(() => {
     getCarById(id).then((res) => {
       setCarDetaisl(res);
       console.log({ res });
     });
-  });
+  }, []);
 
   return (
     <div>
@@ -34,21 +37,11 @@ export default function Booking() {
             />
           </div>
           <div className="booking-container-details">
-            <CarDetails
-              showTitle
-              car={{
-                make: "test",
-                model: "test",
-                color: "test",
-                price_per_hour: "test",
-                category: "test",
-                type: "test",
-              }}
-            />
+            <CarDetails showTitle car={carDetails} />
             <Divider />
             <DatePick />
             <Divider />
-            <UserPersonalInfo />
+            <UserPersonalInfo user={user} />
           </div>
         </div>
         <button>Орендувати</button>
