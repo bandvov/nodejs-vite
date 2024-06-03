@@ -7,16 +7,22 @@ import UserPersonalInfo from "../UserPersonalData/UserPersonalInfo";
 import { useParams } from "react-router-dom";
 import { getCarById } from "../../../api/cars";
 import { useAuth } from "../../../providers/AuthProvider";
+import { getUserById } from "../../../api/users";
 
 export default function Booking() {
   const { id } = useParams();
   const { user } = useAuth();
 
   const [carDetails, setCarDetaisl] = useState(null);
+  const [userData, setUserData] = useState(null);
+
   useEffect(() => {
     getCarById(id).then((res) => {
       setCarDetaisl(res);
       console.log({ res });
+    });
+    getUserById(user?.id).then((res) => {
+      setUserData(res);
     });
   }, []);
 
@@ -41,7 +47,7 @@ export default function Booking() {
             <Divider />
             <DatePick />
             <Divider />
-            <UserPersonalInfo user={user} />
+            <UserPersonalInfo user={userData} />
           </div>
         </div>
         <button>Орендувати</button>
