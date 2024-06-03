@@ -15,26 +15,28 @@ router.post("/login", (req, res, next) => {
         var token = jwt.sign({ email: info.email }, "shhhhh");
         console.log({ token });
         res.cookie("access_token", token, {
+          domain: process.env.COOKIE_DOMAIN,
           httpOnly: true,
           secure: true,
-          domain: process.env.ORIGIN,
-          sameSite: "none",
+          sameSite: "None",
         });
 
         res.cookie("user_id", info.id, {
+          domain: process.env.COOKIE_DOMAIN,
           httpOnly: false,
           secure: false,
-          domain: process.env.ORIGIN,
-          sameSite: "none",
+          sameSite: "None",
         });
 
         res.cookie("user_name", info.first_name + " " + info.last_name, {
-          domain: process.env.ORIGIN,
-          sameSite: "none",
+          domain: process.env.COOKIE_DOMAIN,
+          secure: false,
+          sameSite: "None",
         });
         res.cookie("user_image", info.image, {
-          domain: process.env.ORIGIN,
-          sameSite: "none",
+          domain: process.env.COOKIE_DOMAIN,
+          secure: false,
+          sameSite: "None",
         });
 
         res.json({
@@ -60,27 +62,28 @@ router.get(
     res.cookie("facebook_user_id", req.user.profile.id, {
       httpOnly: true,
       secure: false,
-      domain: process.env.ORIGIN,
-      sameSite: "none",
+      domain: process.env.COOKIE_DOMAIN,
+      sameSite: "None",
     });
 
     res.cookie("access_token", req.user.accessToken, {
       httpOnly: true,
       secure: false,
-      domain: process.env.ORIGIN,
-      sameSite: "none",
+      domain: process.env.COOKIE_DOMAIN,
+      sameSite: "None",
     });
 
     res.cookie("user_id", 1, {
       httpOnly: false,
       secure: false,
-      domain: process.env.ORIGIN,
-      sameSite: "none",
+      domain: process.env.COOKIE_DOMAIN,
+      sameSite: "None",
     });
 
     res.cookie("user_name", req.user.profile.displayName, {
-      domain: process.env.ORIGIN,
-      sameSite: "none",
+      domain: process.env.COOKIE_DOMAIN,
+      secure: false,
+      sameSite: "None",
     });
 
     res.redirect(process.env.REDIRECT_URL);
