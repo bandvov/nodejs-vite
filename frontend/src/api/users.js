@@ -5,7 +5,10 @@ export const getUsers = async () => {
 };
 
 export const getUserById = async (id) => {
-  return fetch(process.env.REACT_APP_API_URL + `/users/${id}`).then((res) => {
+  console.log({ id });
+  return fetch(process.env.REACT_APP_API_URL + `/users/${id}`, {
+    credentials: "include",
+  }).then((res) => {
     return res.json();
   });
 };

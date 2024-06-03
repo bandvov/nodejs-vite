@@ -22,10 +22,14 @@ export default function Booking() {
       console.log({ res });
     });
     console.log({ user });
-    getUserById(user?.id).then((res) => {
-      setUserData(res);
-    });
   }, []);
+  useEffect(() => {
+    if (user?.id) {
+      getUserById(user?.id).then((res) => {
+        setUserData(res);
+      });
+    }
+  }, [user?.id]);
 
   return (
     <div>
