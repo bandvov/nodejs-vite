@@ -9,10 +9,10 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     // Check for user data in cookies on initial render
-    localStorage.getItem("user");
+    const userData = localStorage.getItem("user");
 
-    if (user) {
-      setUser(JSON.parse(user));
+    if (userData) {
+      setUser(JSON.parse(userData));
     }
   }, []);
 
