@@ -106,12 +106,12 @@ const Catalog = () => {
         <div className="body__content">
           <div className="content__body__elem">
             {cars?.map((car) => {
-              const isFavorited = car.favorite_user_ids?.includes(+user.id);
+              const isFavorited = car.favorite_user_ids?.includes(+user?.id);
               return (
                 <CarCard
                   favoriteHandler={async () =>
                     favoriteCar(
-                      { car_id: car.id, user_id: user.id },
+                      { car_id: car.id, user_id: user?.id },
                       isFavorited ? "DELETE" : "POST"
                     )
                   }
