@@ -13,12 +13,12 @@ router.post("/register", (req, res) => {
   userController.createUser(req, res);
 });
 router.get("/profile", (req, res) => {
-  console.log('in profile');
-  if (!req.isAuthenticated()) {
+  console.log("in profile");
+  if (!req?.isAuthenticated()) {
     return res.redirect("/");
   }
-  
-  res.json(req.user);
+
+  res.json(req?.user);
 });
 
 router.get("/:id", (req, res) => {
