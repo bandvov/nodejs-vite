@@ -50,14 +50,18 @@ router.get(
   }
 );
 
-router.get('/google', passport.authenticate('google', {
-  scope: ['profile', 'email']
-}));
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+  })
+);
 
 router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
+    console.log("userData", req.user);
     // Set user profile information in a cookie
     res.cookie("user", JSON.stringify(req.user), {
       domain: process.env.COOKIE_DOMAIN,
