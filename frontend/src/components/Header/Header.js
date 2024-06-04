@@ -7,11 +7,9 @@ const Header = () => {
   const { user, login } = useAuth();
 
   useEffect(() => {
-    if (user.id) {
-      getUserProfile().then((res) => {
-        console.log({ res });
-      });
-    }
+    getUserProfile().then((res) => {
+      console.log({ res });
+    });
   }, []);
 
   return (
