@@ -83,5 +83,21 @@ router.get(
     res.redirect(process.env.REDIRECT_URL);
   }
 );
+router.get("/logout", (req, res) => {
+  req.logout((err) => {
+    if (err) {
+      console.error("Error logging out:", err);
+      return res.status(500).send("Error logging out");
+    }
+    req.session.destroy((err) => {
+      if (err) {
+        console.error("Error destroying session:", err);
+        return res.status(500).send("Error destroying session");
+      }
+      res.clearCookie("connect.sid"); // Adjust the cookie name if it's different
+      res.redirect("/"); // Redirect to the homepage or login page
+    });
+  });
+});
 
 module.exports = router;
