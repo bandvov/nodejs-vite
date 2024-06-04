@@ -1,0 +1,28 @@
+.facebook-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #213460;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.facebook-button:hover {
+  background-color: #165db7;
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}

@@ -84,19 +84,14 @@ router.get(
   }
 );
 router.get("/logout", (req, res) => {
-  req.logout((err) => {
+  req.session.destroy((err) => {
     if (err) {
-      console.error("Error logging out:", err);
-      return res.status(500).send("Error logging out");
+      console.error("Error destroying session:", err);
+      return res.status(500).send("Error destroying session");
     }
-    req.session.destroy((err) => {
-      if (err) {
-        console.error("Error destroying session:", err);
-        return res.status(500).send("Error destroying session");
-      }
-      res.clearCookie("connect.sid"); // Adjust the cookie name if it's different
-      res.redirect("/"); // Redirect to the homepage or login page
-    });
+    delete req.user;
+    res.clearCookie("connect.sid"); // Adjust the cookie name if it's different
+    res.redirect("/"); // Redirect to the homepage or login page
   });
 });
 

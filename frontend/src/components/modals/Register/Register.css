@@ -38,7 +38,7 @@ input {
   margin-top: 5px;
 }
 
-.form-container button {
+ .common-button {
   width: 100%;
   padding: 10px;
   border: none;
