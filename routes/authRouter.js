@@ -18,6 +18,7 @@ router.post("/login", (req, res, next) => {
           httpOnly: true,
           secure: true,
           sameSite: "None",
+          maxAge: 10000 * 60 * 60 * 24,
         });
         res.json({
           success: true,
@@ -44,6 +45,7 @@ router.get(
       secure: true,
       domain: process.env.COOKIE_DOMAIN,
       sameSite: "None",
+      maxAge: 10000 * 60 * 60 * 24,
     });
 
     res.redirect(process.env.REDIRECT_URL);
@@ -61,10 +63,18 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
-    console.log("userData", req.user);
+    console.log("userData", req);
+    res.cookie("exampleCookie", "cookieValue", {
+      domain: process.env.COOKIE_DOMAIN,
+      httpOnly: true,
+      maxAge: 10000 * 60 * 60 * 24,
+      secure: true, // Ensure this is true if using HTTPS
+      sameSite: "None",
+    });
     // Set user profile information in a cookie
     res.cookie("user", JSON.stringify(req.user), {
       domain: process.env.COOKIE_DOMAIN,
+      maxAge: 10000 * 60 * 60 * 24,
       httpOnly: true,
       secure: true,
       sameSite: "None",

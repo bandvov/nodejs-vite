@@ -51,6 +51,7 @@ passport.use(
       callbackURL: process.env.GOOGLE_CALLBACK_URL,
     },
     function (token, tokenSecret, profile, done) {
+      console.log({ profile });
       // You can save the profile information in your database here
       return done(null, { token, profile });
     }
