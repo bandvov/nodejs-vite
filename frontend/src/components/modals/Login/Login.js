@@ -6,6 +6,7 @@ import FacebookButton from "../FacebookButton";
 import { login } from "../../../api/users";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../providers/AuthProvider";
+import GoogleButton from "./GoogleButton";
 
 // Correct regular expression for Ukrainian mobile phone numbers
 const LoginForm = () => {
@@ -88,6 +89,7 @@ const LoginForm = () => {
           }}
         ></div>
       </div>
+      <GoogleButton />
       <FacebookButton />
     </div>
   );

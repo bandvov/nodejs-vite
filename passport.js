@@ -3,6 +3,7 @@ const userService = require("./services/userService");
 const LocalStrategy = require("passport-local").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const bcrypt = require("bcrypt");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 require("dotenv").config();
 
@@ -37,6 +38,21 @@ passport.use(
       console.log({ profile, accessToken });
       // Here, you can save the user to your database or perform any other actions.
       return done(null, { accessToken, profile });
+    }
+  )
+);
+
+// Configure Passport with Google strategy
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: "/auth/google/callback",
+    },
+    function (token, tokenSecret, profile, done) {
+      // You can save the profile information in your database here
+      return done(null, { token, profile });
     }
   )
 );

@@ -13,7 +13,6 @@ router.post("/login", (req, res, next) => {
         if (err) res.json({ error: err });
         // Generate the token
         var token = jwt.sign({ email: info.email }, "shhhhh");
-        console.log({ token });
         res.cookie("access_token", token, {
           domain: process.env.COOKIE_DOMAIN,
           httpOnly: true,
@@ -47,6 +46,26 @@ router.get(
       sameSite: "None",
     });
 
+    res.redirect(process.env.REDIRECT_URL);
+  }
+);
+
+router.get('/google', passport.authenticate('google', {
+  scope: ['profile', 'email']
+}));
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  (req, res) => {
+    // Set user profile information in a cookie
+    res.cookie("user", JSON.stringify(req.user), {
+      domain: process.env.COOKIE_DOMAIN,
+      httpOnly: true,
+      secure: true,
+      sameSite: "None",
+    });
+    // Successful authentication, redirect home.
     res.redirect(process.env.REDIRECT_URL);
   }
 );
