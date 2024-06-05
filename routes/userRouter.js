@@ -14,8 +14,8 @@ router.post("/register", (req, res) => {
 });
 router.get("/profile", (req, res) => {
   res.json({
-    session: req?.session,
-    user: req?.session,
+    session: req?.session.cookie,
+    user: req?.session.profile,
   });
 });
 
