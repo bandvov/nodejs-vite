@@ -2,7 +2,7 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./Register.css";
-import FacebookButton from "../FacebookButton";
+import FacebookButton from "../Login/FacecookButton/FacebookButton";
 import { createUser } from "../../../api/users";
 import { useNavigate } from "react-router-dom";
 
@@ -98,7 +98,7 @@ const RegistrationForm = () => {
             <ErrorMessage name="password" component="div" className="error" />
           </div>
 
-          <button type="submit" disabled={!isValid}>
+          <button className="common-button" type="submit" disabled={!isValid}>
             Зареєструватись
           </button>
           <FacebookButton />

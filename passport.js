@@ -3,6 +3,7 @@ const userService = require("./services/userService");
 const LocalStrategy = require("passport-local").Strategy;
 const FacebookStrategy = require("passport-facebook").Strategy;
 const bcrypt = require("bcrypt");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
 require("dotenv").config();
 
@@ -31,7 +32,7 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
-      callbackURL: "/auth/facebook/callback",
+      callbackURL: process.env.FACEBOOK_CALLBACK_URL,
     },
     function (accessToken, refreshToken, profile, done) {
       console.log({ profile, accessToken });
@@ -41,11 +42,28 @@ passport.use(
   )
 );
 
+// Configure Passport with Google strategy
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: process.env.GOOGLE_CALLBACK_URL,
+    },
+    function (token, tokenSecret, profile, done) {
+      console.log("google profile", { profile });
+      // You can save the profile information in your database here
+      return done(null, { token, profile });
+    }
+  )
+);
+
 passport.serializeUser(function (user, done) {
   done(null, user);
 });
 
 passport.deserializeUser(function (obj, done) {
+  console.log({ obj });
   done(null, obj);
 });
 

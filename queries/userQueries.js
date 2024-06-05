@@ -7,7 +7,7 @@ const createUserQuery =
 const getUserByIdQuery =
   "SELECT id, email, first_name, last_name, created_at, phone_number FROM users WHERE id = $1;";
 const getUserByLoginQuery =
-  "SELECT id, email, first_name, last_name, created_at, phone_number,password FROM users WHERE login = $1;";
+  "SELECT id, email, first_name, last_name, created_at, phone_number,password, image FROM users WHERE login = $1;";
 const userSearchQuery = `
 SELECT id, email, first_name, last_name, created_at, phone_number, image 
 FROM users

@@ -1,0 +1,31 @@
+.common-button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: orange;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.google-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  border: 1px solid orange;
+  border-radius: 14px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.google-button:hover {
+  background-color: #357ae8;
+}
+
+.google-button img {
+  margin-right: 8px;
+}

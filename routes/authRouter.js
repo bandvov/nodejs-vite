@@ -13,22 +13,18 @@ router.post("/login", (req, res, next) => {
         if (err) res.json({ error: err });
         // Generate the token
         var token = jwt.sign({ email: info.email }, "shhhhh");
-        console.log({ token });
-        res.cookie("access_token", token, { httpOnly: true, secure: true });
-
-        res.cookie("user_id", info.id, {
-          httpOnly: false,
-          secure: false,
+        res.cookie("access_token", token, {
+          domain: process.env.COOKIE_DOMAIN,
+          httpOnly: true,
+          secure: true,
         });
-
-        res.cookie("user_name", info.first_name + " " + info.last_name);
-
         res.json({
           success: true,
-          id: 4,
+          id: info.id,
           email: info.email,
           first_name: info.first_name,
           last_name: info.last_name,
+          image: info.image,
         });
       });
     }
@@ -42,25 +38,51 @@ router.get(
   function (req, res) {
     console.log("here", req.user);
     // Successful authentication, set a cookie and redirect home
-    res.cookie("facebook_user_id", req.user.profile.id, {
-      httpOnly: true,
-      secure: false,
-    });
-
     res.cookie("access_token", req.user.accessToken, {
       httpOnly: true,
-      secure: false,
+      secure: true,
+      domain: process.env.COOKIE_DOMAIN,
     });
 
-    res.cookie("user_id", 1, {
-      httpOnly: false,
-      secure: false,
-    });
-
-    res.cookie("user_name", req.user.profile.displayName);
-
-    res.redirect("/");
+    res.redirect(process.env.REDIRECT_URL);
   }
 );
+
+router.get(
+  "/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+  })
+);
+
+router.get(
+  "/google/callback",
+  passport.authenticate("google", { failureRedirect: "/" }),
+  (req, res) => {
+    console.log(" google userData", req.session);
+    res.cookie("exampleCookie", "cookieValue", {
+      domain: process.env.COOKIE_DOMAIN,
+      httpOnly: true,
+      secure: true, // Ensure this is true if using HTTPS
+    });
+    // Set user profile information in a cookie
+    res.cookie("user", JSON.stringify(req.session), {
+      domain: process.env.COOKIE_DOMAIN,
+      httpOnly: false,
+      secure: true,
+    });
+    res.redirect("/api/auth/profile");
+  }
+);
+router.get("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Error destroying session:", err);
+      return res.status(500).send("Error destroying session");
+    }
+    res.clearCookie("connect.sid"); // Adjust the cookie name if it's different
+    res.redirect("/"); // Redirect to the homepage or login page
+  });
+});
 
 module.exports = router;

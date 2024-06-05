@@ -12,6 +12,12 @@ router.get("/search", (req, res) => {
 router.post("/register", (req, res) => {
   userController.createUser(req, res);
 });
+router.get("/profile", (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect("/api/auth/google");
+  }
+  res.json(req.user); // Send user data to the client
+});
 
 router.get("/:id", (req, res) => {
   userController.getUserById(req, res);

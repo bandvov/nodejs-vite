@@ -2,10 +2,12 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./Login.css";
-import FacebookButton from "../FacebookButton";
+import FacebookButton from "./FacecookButton/FacebookButton";
 import { login } from "../../../api/users";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../providers/AuthProvider";
+import GoogleButton from "./GoogleButton/GoogleButton";
+import { loginFacebook, loginGoogle } from "../../../api/auth";
 
 // Correct regular expression for Ukrainian mobile phone numbers
 const LoginForm = () => {
@@ -36,8 +38,9 @@ const LoginForm = () => {
           login(values).then((res) => {
             if (res.success) {
               addUserDataToStore({
-                userName: res.first_name + " " + res.last_name,
-                userId: res.id,
+                name: res.first_name + " " + res.last_name,
+                id: res.id,
+                image: res.image,
               });
               navigate("/");
             } else {
@@ -59,7 +62,7 @@ const LoginForm = () => {
               <ErrorMessage name="password" component="div" className="error" />
             </div>
 
-            <button type="submit" disabled={!isValid}>
+            <button className="common-button" type="submit" disabled={!isValid}>
               Увійти
             </button>
           </Form>
@@ -87,7 +90,8 @@ const LoginForm = () => {
           }}
         ></div>
       </div>
-      <FacebookButton />
+      <FacebookButton onClick={loginFacebook} />
+      <GoogleButton onClick={loginGoogle} />
     </div>
   );
 };

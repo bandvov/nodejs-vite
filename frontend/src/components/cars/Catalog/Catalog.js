@@ -5,7 +5,7 @@ import "./Catalog.css";
 import { useAuth } from "../../../providers/AuthProvider.js";
 
 const Catalog = () => {
-  const { userId } = useAuth();
+  const { user } = useAuth();
   const [cars, setCars] = useState([]);
   const [filters, setFilters] = useState({
     color: "",
@@ -106,12 +106,12 @@ const Catalog = () => {
         <div className="body__content">
           <div className="content__body__elem">
             {cars?.map((car) => {
-              const isFavorited = car.favorite_user_ids?.includes(+userId);
+              const isFavorited = car.favorite_user_ids?.includes(+user?.id);
               return (
                 <CarCard
                   favoriteHandler={async () =>
                     favoriteCar(
-                      { car_id: car.id, user_id: userId },
+                      { car_id: car.id, user_id: user?.id },
                       isFavorited ? "DELETE" : "POST"
                     )
                   }

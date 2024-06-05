@@ -1,42 +1,38 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import Cookies from "js-cookie";
 
 // Create a context for the authentication state
 const AuthContext = createContext();
 
 // Create a provider component
 export const AuthProvider = ({ children }) => {
-  const [userName, setUserName] = useState(null);
-  const [userId, setUserId] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     // Check for user data in cookies on initial render
-    const userName = Cookies.get("user_name");
-    const userId = Cookies.get("user_id");
-    if (userName) {
-      setUserName(userName);
-    }
-    if (userId) {
-      setUserId(userId);
+    const userData = localStorage.getItem("user");
+
+    if (userData) {
+      setUser(JSON.parse(userData));
     }
   }, []);
 
-  const login = ({ userName, userId }) => {
+  const login = (user) => {
     // Logic to authenticate user
-    setUserName(userName);
-    setUserId(userId);
+    setUser(user);
+    localStorage.setItem("user", JSON.stringify(user));
   };
 
   const logout = () => {
     // Logic to log out user
-    setUserName(null);
-    setUserId(null);
-    Cookies.remove("user_name");
-    Cookies.remove("user_id");
+    setUser(null);
   };
 
+  console.log({
+    user,
+  });
+
   return (
-    <AuthContext.Provider value={{ userName, userId, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

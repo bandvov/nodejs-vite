@@ -8,14 +8,15 @@ const authRouter = require("./routes/authRouter");
 const session = require("express-session");
 const passport = require("./passport");
 const cookieParser = require("cookie-parser");
+require("dotenv").config();
 
 // Enable all CORS requests
-// app.use(
-//   cors({
-//     origin: "http://localhost:3000", // Replace with the URL of your React app
-//     credentials: true,
-//   })
-// );
+app.use(
+  cors({
+    origin: process.env.ORIGIN || "*", // Replace with the URL of your React app
+    credentials: true,
+  })
+);
 const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
@@ -27,25 +28,26 @@ app.use(
     secret: "your-secret-key",
     resave: false,
     saveUninitialized: true,
+    cookie: {
+      maxAge: 1000 * 60,
+    },
   })
 );
 
-app.use("/cars", carRouter);
-app.use("/users", userRouter);
-app.use("/auth", authRouter);
+app.use("/api/cars", carRouter);
+app.use("/api/users", userRouter);
+app.use("/api/auth", authRouter);
 
 app.use(passport.initialize());
 app.use(passport.session());
 
+// // Serve static files from the React app
+// app.use(express.static(path.join(__dirname, "frontend/build")));
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, "frontend/build")));
-
-
-// Handles any requests that don't match the ones above
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname + "/frontend/build/index.html"));
-});
+// // Handles any requests that don't match the ones above
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname + "/frontend/build/index.html"));
+// });
 
 // Start the serverconst PORT = 3000;
 app.listen(PORT, () => {

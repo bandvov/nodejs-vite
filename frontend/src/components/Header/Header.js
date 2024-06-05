@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Header.css";
 import { useAuth } from "../../providers/AuthProvider";
+import { getUserProfile } from "../../api/users";
 
 const Header = () => {
-  const { userName } = useAuth();
+  const { user, login } = useAuth();
+
+  useEffect(() => {
+    getUserProfile().then((res) => {
+      console.log({ res });
+    });
+  }, []);
 
   return (
     <section className="header-section">
@@ -14,7 +21,7 @@ const Header = () => {
         <nav className="main-nav">
           <ul className="main-nav-list">
             <li className="main-nav-list-item">
-              <a href="/Catalog" className="main-nav-link">
+              <a href="/catalog" className="main-nav-link">
                 Пропозиції
               </a>
             </li>
@@ -38,8 +45,18 @@ const Header = () => {
             </li>
 
             <li className="main-nav-list-item">
-              {userName ? (
-                <h3 className="main-nav-link">{userName}</h3>
+              {user ? (
+                <a className="main-nav-link" href="/profile">
+                  <img
+                    src={user.image}
+                    alt="Avatar"
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      borderRadius: "50%",
+                    }}
+                  />
+                </a>
               ) : (
                 <a href="/auth/login" className="main-nav-link">
                   Увійти
