@@ -67,7 +67,7 @@ router.get(
       secure: true, // Ensure this is true if using HTTPS
     });
     // Set user profile information in a cookie
-    res.cookie("user", JSON.stringify(req.session.profile), {
+    res.cookie("user", JSON.stringify(req.session), {
       domain: process.env.COOKIE_DOMAIN,
       maxAge: 10000 * 60 * 60 * 24,
       httpOnly: true,
