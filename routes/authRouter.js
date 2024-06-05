@@ -60,14 +60,14 @@ router.get(
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
     console.log(" google userData", req.session);
-    console.log(" google userData", req.user);
+    console.log(" google userData", req.session.profile);
     res.cookie("exampleCookie", "cookieValue", {
       domain: process.env.COOKIE_DOMAIN,
       httpOnly: true,
       secure: true, // Ensure this is true if using HTTPS
     });
     // Set user profile information in a cookie
-    res.cookie("user", JSON.stringify(req.user), {
+    res.cookie("user", JSON.stringify(req.session.profile), {
       domain: process.env.COOKIE_DOMAIN,
       maxAge: 10000 * 60 * 60 * 24,
       httpOnly: true,
