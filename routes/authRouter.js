@@ -17,8 +17,6 @@ router.post("/login", (req, res, next) => {
           domain: process.env.COOKIE_DOMAIN,
           httpOnly: true,
           secure: true,
-          sameSite: "None",
-          maxAge: 10000 * 60 * 60 * 24,
         });
         res.json({
           success: true,
@@ -44,8 +42,6 @@ router.get(
       httpOnly: true,
       secure: true,
       domain: process.env.COOKIE_DOMAIN,
-      sameSite: "None",
-      maxAge: 10000 * 60 * 60 * 24,
     });
 
     res.redirect(process.env.REDIRECT_URL);
@@ -63,13 +59,11 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
-    console.log("userData", req);
+    console.log("userData", req.session);
     res.cookie("exampleCookie", "cookieValue", {
       domain: process.env.COOKIE_DOMAIN,
       httpOnly: true,
-      maxAge: 10000 * 60 * 60 * 24,
       secure: true, // Ensure this is true if using HTTPS
-      sameSite: "None",
     });
     // Set user profile information in a cookie
     res.cookie("user", JSON.stringify(req.user), {
@@ -77,9 +71,7 @@ router.get(
       maxAge: 10000 * 60 * 60 * 24,
       httpOnly: true,
       secure: true,
-      sameSite: "None",
     });
-    // Successful authentication, redirect home.
     res.redirect(process.env.REDIRECT_URL);
   }
 );
@@ -89,7 +81,6 @@ router.get("/logout", (req, res) => {
       console.error("Error destroying session:", err);
       return res.status(500).send("Error destroying session");
     }
-    delete req.user;
     res.clearCookie("connect.sid"); // Adjust the cookie name if it's different
     res.redirect("/"); // Redirect to the homepage or login page
   });
