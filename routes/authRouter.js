@@ -71,7 +71,7 @@ router.get(
       httpOnly: false,
       secure: true,
     });
-    res.redirect("/api/auth/profile");
+    res.redirect(process.env.REDIRECT_URL);
   }
 );
 router.get("/logout", (req, res) => {

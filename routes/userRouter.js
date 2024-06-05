@@ -13,9 +13,6 @@ router.post("/register", (req, res) => {
   userController.createUser(req, res);
 });
 router.get("/profile", (req, res) => {
-  if (!req?.isAuthenticated()) {
-    return res.redirect("/api/auth/google");
-  }
   console.log(req?.session?.passport);
   res.json(req?.user); // Send user data to the client
 });
