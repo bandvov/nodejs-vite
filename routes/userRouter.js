@@ -13,10 +13,7 @@ router.post("/register", (req, res) => {
   userController.createUser(req, res);
 });
 router.get("/profile", (req, res) => {
-  res.json({
-    session: req?.session.cookie,
-    user: req?.session.profile,
-  });
+  res.json(req.user); // Send user data to the client
 });
 
 router.get("/:id", (req, res) => {

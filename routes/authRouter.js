@@ -68,7 +68,7 @@ router.get(
     // Set user profile information in a cookie
     res.cookie("user", JSON.stringify(req.session), {
       domain: process.env.COOKIE_DOMAIN,
-      httpOnly: true,
+      httpOnly: false,
       secure: true,
     });
     res.redirect(process.env.REDIRECT_URL);
