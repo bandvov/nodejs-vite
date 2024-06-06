@@ -59,11 +59,12 @@ passport.use(
 );
 
 passport.serializeUser(function (user, done) {
+  console.log("serialized", { user });
   done(null, user);
 });
 
 passport.deserializeUser(function (obj, done) {
-  console.log({ obj });
+  console.log("deserialized", { obj });
   done(null, obj);
 });
 
