@@ -15,6 +15,7 @@ app.use(
   cors({
     origin: process.env.ORIGIN || "*", // Replace with the URL of your React app
     credentials: true,
+        exposedHeaders: ["set-cookie"],
   })
 );
 const PORT = process.env.PORT || 4000;
