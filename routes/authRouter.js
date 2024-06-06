@@ -59,6 +59,7 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
+    console.log("here", req.user);
     console.log(" google userData", req.session);
     res.cookie("exampleCookie", "cookieValue", {
       domain: process.env.COOKIE_DOMAIN,
