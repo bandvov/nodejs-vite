@@ -15,7 +15,7 @@ app.use(
   cors({
     origin: process.env.ORIGIN || "*", // Replace with the URL of your React app
     credentials: true,
-        exposedHeaders: ["set-cookie"],
+    exposedHeaders: ["set-cookie"],
   })
 );
 const PORT = process.env.PORT || 4000;
@@ -29,8 +29,11 @@ app.use(
     secret: "your-secret-key",
     resave: false,
     saveUninitialized: true,
-    store: new (require('express-session').MemoryStore)(),
-    
+    store: new (require("express-session").MemoryStore)(),
+    cookie: {
+      secure: true,
+      sameSite: "none",
+    },
   })
 );
 

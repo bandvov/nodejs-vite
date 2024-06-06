@@ -17,7 +17,7 @@ router.post("/login", (req, res, next) => {
           domain: process.env.COOKIE_DOMAIN,
           httpOnly: true,
           secure: true,
-          sameSite: "None",
+          sameSite: "none",
           maxAge: 1000 * 60 * 60 * 24,
         });
         res.json({
@@ -44,7 +44,7 @@ router.get(
       domain: process.env.COOKIE_DOMAIN,
       httpOnly: true,
       secure: true,
-      sameSite: "None",
+      sameSite: "none",
       maxAge: 1000 * 60 * 60 * 24,
     });
 
@@ -53,7 +53,7 @@ router.get(
       domain: process.env.COOKIE_DOMAIN,
       httpOnly: false,
       secure: true,
-      sameSite: "None",
+      sameSite: "none",
       maxAge: 1000 * 60 * 60 * 24,
     });
     res.redirect(process.env.REDIRECT_URL);
@@ -76,7 +76,7 @@ router.get(
       domain: process.env.COOKIE_DOMAIN,
       httpOnly: true,
       secure: true, // Ensure this is true if using HTTPS
-      sameSite: "None",
+      sameSite: "none",
       maxAge: 1000 * 60 * 60 * 24,
     });
     // Set user profile information in a cookie
@@ -84,7 +84,7 @@ router.get(
       domain: process.env.COOKIE_DOMAIN,
       httpOnly: false,
       secure: true,
-      sameSite: "None",
+      sameSite: "none",
       maxAge: 1000 * 60 * 60 * 24,
     });
     res.redirect(process.env.REDIRECT_URL);
