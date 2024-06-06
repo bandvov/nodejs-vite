@@ -40,10 +40,10 @@ router.get(
   function (req, res) {
     console.log("here", req.user);
     // Successful authentication, set a cookie and redirect home
-    res.cookie("access_token", req.user.accessToken, {
+    res.cookie("access_token", req.user?.accessToken, {
+      domain: process.env.COOKIE_DOMAIN,
       httpOnly: true,
       secure: true,
-      domain: process.env.COOKIE_DOMAIN,
       sameSite: "None",
       maxAge: 1000 * 60 * 60 * 24,
     });
@@ -72,7 +72,7 @@ router.get(
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
     console.log("here", req.user);
-    res.cookie("accecc_token", req.user.token, {
+    res.cookie("accecc_token", req.user.accessToken, {
       domain: process.env.COOKIE_DOMAIN,
       httpOnly: true,
       secure: true, // Ensure this is true if using HTTPS

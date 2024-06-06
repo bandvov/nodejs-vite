@@ -13,8 +13,8 @@ router.post("/register", (req, res) => {
   userController.createUser(req, res);
 });
 router.get("/profile", (req, res) => {
-  console.log(req.cookies);
-  res.json(req.cookies["user"]); // Send user data to the client
+  console.log(req.session["passport"]["user"]);
+  res.json(req.session["passport"]["user"]); // Send user data to the client
 });
 
 router.get("/:id", (req, res) => {
