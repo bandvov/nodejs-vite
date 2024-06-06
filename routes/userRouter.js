@@ -5,6 +5,7 @@ const userController = require("../controllers/userController");
 router.get("/", (req, res) => {
   userController.getUsers(req, res);
 });
+
 router.get("/search", (req, res) => {
   userController.searchUser(req, res);
 });
@@ -12,9 +13,10 @@ router.get("/search", (req, res) => {
 router.post("/register", (req, res) => {
   userController.createUser(req, res);
 });
+
 router.get("/profile", (req, res) => {
-  console.log("session cookie", req.session);
-  res.json(req.user); // Send user data to the client
+  console.log("session", req.session);
+  res.json(req?.session?.user); // Send user data to the client
 });
 
 router.get("/:id", (req, res) => {
