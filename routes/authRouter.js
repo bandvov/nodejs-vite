@@ -49,7 +49,7 @@ router.get(
     });
 
     // Set user profile information in a cookie
-    res.cookie("user", JSON.stringify(req.user?.profile), {
+    res.cookie("user", req.user?.profile.id, {
       domain: process.env.COOKIE_DOMAIN,
       httpOnly: false,
       secure: true,
@@ -82,7 +82,7 @@ router.get(
       maxAge: 1000 * 60 * 60 * 24,
     });
     // Set user profile information in a cookie
-    res.cookie("user", JSON.stringify(req.user?.profile), {
+    res.cookie("user", req.user?.profile.id, {
       domain: process.env.COOKIE_DOMAIN,
       httpOnly: false,
       secure: true,
