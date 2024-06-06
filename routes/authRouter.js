@@ -17,6 +17,7 @@ router.post("/login", (req, res, next) => {
           domain: process.env.COOKIE_DOMAIN,
           httpOnly: true,
           secure: true,
+          sameSite: "None",
         });
         res.json({
           success: true,
@@ -42,6 +43,7 @@ router.get(
       httpOnly: true,
       secure: true,
       domain: process.env.COOKIE_DOMAIN,
+      sameSite: "None",
     });
 
     res.redirect(process.env.REDIRECT_URL);
@@ -71,7 +73,7 @@ router.get(
       domain: process.env.COOKIE_DOMAIN,
       httpOnly: false,
       secure: true,
-      sameSite: "none",
+      sameSite: "None",
     });
     res.redirect(process.env.REDIRECT_URL);
   }
