@@ -64,12 +64,14 @@ router.get(
       domain: process.env.COOKIE_DOMAIN,
       httpOnly: true,
       secure: true, // Ensure this is true if using HTTPS
+      sameSite: "None",
     });
     // Set user profile information in a cookie
     res.cookie("user", JSON.stringify(req.user?.profile), {
       domain: process.env.COOKIE_DOMAIN,
       httpOnly: false,
       secure: true,
+      sameSite: "none",
     });
     res.redirect(process.env.REDIRECT_URL);
   }
