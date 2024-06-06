@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/userController");
+const { isAuthenticated } = require("../middlewares/authMiddleware");
 
 router.get("/", (req, res) => {
   userController.getUsers(req, res);
@@ -12,9 +13,8 @@ router.get("/search", (req, res) => {
 router.post("/register", (req, res) => {
   userController.createUser(req, res);
 });
-router.get("/profile", (req, res) => {
-  console.log(req.session["passport"]["user"]);
-  res.json(req.session["passport"]["user"]); // Send user data to the client
+router.get("/profile", isAuthenticated, (req, res) => {
+  res.json(req.user); // Send user data to the client
 });
 
 router.get("/:id", (req, res) => {
