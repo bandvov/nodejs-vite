@@ -15,7 +15,8 @@ router.post("/register", (req, res) => {
 });
 
 router.get("/profile", (req, res) => {
-  console.log('cookies in header',req.cookies);
+  console.log("cookies in header", req.headers);
+  console.log("cookies in header", req.authInfo);
   console.log("session", req.session);
   res.json(req?.session?.user); // Send user data to the client
 });
