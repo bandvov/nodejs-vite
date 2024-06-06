@@ -72,6 +72,7 @@ router.get(
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
     req.session.user = req.user;
+    req.session.save()
     console.log("here", req.user);
     res.cookie("accecc_token", req.user.accessToken, {
       domain: process.env.COOKIE_DOMAIN,
