@@ -13,7 +13,8 @@ router.get("/search", (req, res) => {
 router.post("/register", (req, res) => {
   userController.createUser(req, res);
 });
-router.get("/profile", isAuthenticated, (req, res) => {
+router.get("/profile", (req, res) => {
+  console.log("session cookie", req.session.cookie);
   res.json(req.user); // Send user data to the client
 });
 
