@@ -29,11 +29,7 @@ app.use(
     secret: "your-secret-key",
     resave: false,
     saveUninitialized: true,
-    store: new (require("express-session").MemoryStore)(),
-    cookie: {
-      secure: true,
-      sameSite: "none",
-    },
+    store: new (require("express-session").MemoryStore)(),  
   })
 );
 

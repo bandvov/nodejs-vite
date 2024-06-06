@@ -85,7 +85,7 @@ router.get(
       domain: process.env.COOKIE_DOMAIN,
       httpOnly: false,
       secure: true,
-      sameSite: "none",
+      sameSite: "None",
       maxAge: 1000 * 60 * 60 * 24,
     });
     res.redirect(process.env.REDIRECT_URL);
